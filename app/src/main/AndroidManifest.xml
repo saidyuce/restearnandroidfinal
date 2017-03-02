@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.theoc.restapp">
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:name=".helper.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/LoginTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MyPointsActivity"
+            android:label="@string/title_activity_my_points"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MyPointsDetailActivity"
+            android:label="@string/title_activity_my_points_detail"
+            android:theme="@style/AppTheme" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/googlemapsapi" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"
+            tools:replace="android:value" />
+
+        <activity android:name=".QRActivity" />
+        <activity
+            android:name=".CafeJoinActivity"
+            android:label="@string/title_activity_cafe_join"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AnketActivity"
+            android:label="@string/title_activity_anket"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".CafeActivity"
+            android:label="@string/title_activity_cafe"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/LoginTheme" />
+        <activity
+            android:name=".sidemenu.HakkimizdaActivity"
+            android:label="@string/title_activity_hakkimizda"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".sidemenu.OneriActivity"
+            android:label="@string/title_activity_oneri"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".sidemenu.SSSActivity"
+            android:label="@string/title_activity_sss"
+            android:theme="@style/AppTheme" />
+
+        <service android:name=".helper.FirebaseTokenCheck">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".helper.FirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

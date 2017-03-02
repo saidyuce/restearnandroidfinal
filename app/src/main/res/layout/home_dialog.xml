@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/RL">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/view2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            app:cardElevation="24dp"
+            app:cardCornerRadius="3dp"
+            android:layout_width="500dp"
+            android:layout_height="375dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="70dp"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="MEKAN"
+                    android:id="@+id/textView97"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="10"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:id="@+id/mekanNamTextView"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:fontFamily="sans-serif-light"
+                    android:textAlignment="center"
+                    android:text="..."
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="15"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="KAMPANYA TÜRÜ"
+                    android:id="@+id/textView11"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="10"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:id="@+id/kampanyaTypeTextView"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:fontFamily="sans-serif-light"
+                    android:textAlignment="center"
+                    android:text="..."
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="15"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="KAMPANYA İÇERİĞİ"
+                    android:id="@+id/textView17"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="10"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:id="@+id/kampanyaDetailTextView"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:fontFamily="sans-serif-light"
+                    android:textAlignment="center"
+                    android:text="..."
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="20"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Mekan Sayfasına Git"
+                    android:id="@+id/goButton"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="20"
+                    android:background="@color/colorAccent"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/logoImageView"
+            android:layout_alignTop="@+id/view2"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/placeholder"
+            android:elevation="24dp"
+            app:civ_border_color="#fff"
+            app:civ_border_width="2dp"
+            android:layout_marginTop="-90dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

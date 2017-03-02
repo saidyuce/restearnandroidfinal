@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/firstRL"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_alignParentLeft="true">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/placeholderImageView2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:civ_border_width="0.5dp"
+        app:civ_border_color="#d5d5d5d5"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/kafeadıTextView"
+        android:textSize="16sp"
+        android:focusableInTouchMode="false"
+        android:fontFamily="sans-serif-thin"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/placeholderImageView2"
+        android:layout_toEndOf="@+id/placeholderImageView2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="7.5dp"
+        android:layout_toRightOf="@+id/placeholderImageView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/kafelokasyonTextView"
+        android:textSize="10sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@+id/kafeadıTextView"
+        android:layout_alignStart="@+id/kafeadıTextView"
+        android:layout_alignLeft="@+id/kafeadıTextView" />
+
+    <RelativeLayout
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:id="@+id/relativeLayout2">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:max="360"
+            android:progress="0"
+            android:progressDrawable="@drawable/circular"
+            android:indeterminate="false"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/dereceTextView"
+            android:layout_alignParentEnd="false"
+            android:textColor="@color/colorAccent"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textview99"
+            android:text="\u00B0"
+            android:textColor="@color/colorAccent"
+            android:layout_toEndOf="@id/dereceTextView"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/dereceTextView" />
+    </RelativeLayout>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:id="@+id/spinner8"
+        android:layout_alignParentStart="false"
+        android:background="#d5d5d5d5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ödülTextView"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/relativeLayout2"
+        android:layout_toStartOf="@+id/relativeLayout2"
+        android:layout_marginRight="15dp"
+        android:fontFamily="sans-serif"
+        android:textSize="18sp"
+        android:textColor="#b71c1c" />
+</RelativeLayout>

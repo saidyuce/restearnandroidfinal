@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:paddingLeft="28dp"
+    android:paddingRight="28dp">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1)"
+            android:id="@+id/soruNoTextView"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personelimiz yeterli miydi? Beklediğiniz hizmeti alabildiniz mi?"
+            android:id="@+id/soruTextView"
+            android:layout_toRightOf="@+id/soruNoTextView"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="12.5sp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignTop="@+id/soruNoTextView"
+            android:textColor="#000"
+            />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/soruTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/radioGroup"
+        android:layout_alignStart="@id/soruNoTextView"
+        android:weightSum="100">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/anket11"
+            android:button="@android:color/transparent"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_weight="25"
+            android:maxLength="10"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton2"
+            android:drawableTop="@drawable/anket12"
+            android:background="@android:color/transparent"
+            android:button="@android:color/transparent"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_weight="25"
+            android:maxLength="10"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton3"
+            android:drawableTop="@drawable/anket13"
+            android:background="@android:color/transparent"
+            android:button="@android:color/transparent"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_weight="25"
+            android:maxLength="10"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton4"
+            android:drawableTop="@drawable/anket14"
+            android:background="@android:color/transparent"
+            android:button="@android:color/transparent"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_weight="25"
+            android:maxLength="10"/>
+    </RadioGroup>
+
+
+</RelativeLayout>

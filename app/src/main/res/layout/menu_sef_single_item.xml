@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<android.support.v7.widget.CardView
+    android:layout_width="130dp"
+    android:layout_height="120dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="5dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardElevation="2dp"
+    android:id="@+id/view"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:src="@drawable/placeholder"
+        android:scaleType="fitXY"
+        android:id="@+id/foodImageView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Et Burger"
+        android:id="@+id/foodTextView"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="12sp"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="bottom|left"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="2.5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15 TL"
+        android:id="@+id/priceTextView"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="12sp"
+        android:layout_alignBottom="@+id/foodTextView"
+        android:textColor="#000"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="2.5dp"
+        />
+
+</android.support.v7.widget.CardView>
+</LinearLayout>

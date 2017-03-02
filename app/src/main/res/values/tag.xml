@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <item type="id" name="campaing_id"/>
+    <item type="id" name="cardview_id"/>
+    <item type="id" name="surwey_send"/>
+    <item type="id" name="surwey_id"/>
+    <item type="id" name="surweyres_id"/>
+    <item type="id" name="waiter_id"/>
+    <item type="id" name="frame_id"/>
+    <item type="id" name="waiter_rating"/>
+</resources>

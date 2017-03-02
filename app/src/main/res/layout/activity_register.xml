@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".LoginActivity"
+    android:background="@drawable/arkaplan">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layout_weight="23"
+        android:gravity="bottom|center_horizontal"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/logoImageView"
+            android:src="@drawable/logo"
+            android:layout_weight="70"
+
+            android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:focusableInTouchMode="true"
+        android:gravity="bottom">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/isimEditText"
+            android:layout_marginRight="52dp"
+            android:layout_marginEnd="52dp"
+            android:hint="Isim"
+            android:fontFamily="sans-serif-light"
+            android:textColorHint="#fff"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/soyisimEditText"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/soyisimEditText"
+            android:layout_marginRight="52dp"
+            android:layout_marginEnd="52dp"
+            android:hint="Soyisim"
+            android:fontFamily="sans-serif-light"
+            android:textColorHint="#fff"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/emailEditText"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:focusableInTouchMode="true"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailEditText"
+            android:layout_marginRight="52dp"
+            android:layout_marginEnd="52dp"
+            android:hint="E-mail"
+            android:fontFamily="sans-serif-light"
+            android:textColorHint="#fff"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/sifreEditText"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sifreEditText"
+            android:layout_marginRight="52dp"
+            android:layout_marginEnd="52dp"
+            android:hint="Sifre"
+            android:fontFamily="sans-serif-light"
+            android:textColorHint="#fff"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/sifreOnayEditText"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sifreOnayEditText"
+            android:layout_marginRight="52dp"
+            android:layout_marginEnd="52dp"
+            android:hint="Sifre Onay"
+            android:fontFamily="sans-serif-light"
+            android:textColorHint="#fff"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_weight="25">
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/registerButton"
+            android:background= "@drawable/button_border"
+            android:layout_marginLeft="52dp"
+            android:layout_marginRight="52dp"
+            android:text="Kayit Ol"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
+            android:layout_height="55dp" />
+    </LinearLayout>
+</LinearLayout>

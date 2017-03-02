@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/content_hakkimizda"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".sidemenu.HakkimizdaActivity"
+    tools:showIn="@layout/activity_hakkimizda">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100"
+            android:layout_margin="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                android:src="@drawable/logo"
+                android:scaleType="centerInside"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="70">
+
+                <TextView
+                    android:text="Restearn, kafe ve restaurantlardaki alışverişinizi kişiselleştiren bir mobil uygulamadır. \n\nRestearn, kullanıcılarına daha önce denemediği mekan ve tatları denemeyi, indirimli fiyatları yakalamayı ve her zaman gittiğiniz mekanlarda ikram kazanıp daha samimi karşılanmayı sağlayan bir akıllı iş zekasıdır. \n\nMüşteri mutluluğu ve memnuniyetini temel amaç haline getiren Restearn, kullanıcılarına deneyimli bir hizmet sunarak, en çok sevdiğiniz ürünleri en güzel yerlerde tüketmenizi sağlar."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-light"
+                    android:id="@+id/textView"
+                    android:layout_above="@+id/moreTextView"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"/>
+
+                <TextView
+                    android:text="Daha fazla bilgi için: www.restearn.com"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-light"
+                    android:autoLink="web"
+                    android:id="@+id/moreTextView"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="24dp"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:gravity="center"
+                android:weightSum="100"
+                android:layout_weight="10">
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fbImageButton"
+                    android:layout_weight="30"
+                    android:src="@drawable/facebook"
+                    android:scaleType="centerInside"
+                    android:background="#00ffffff"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/twitterImageButton"
+                    android:layout_weight="30"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/twitter"
+                    android:background="#00ffffff"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/instaImageButton"
+                    android:layout_weight="30"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/instagram"
+                    android:background="#00ffffff"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

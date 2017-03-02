@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".LoginActivity"
+    android:background="@drawable/arkaplan">
+
+    <com.facebook.login.widget.LoginButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fbLoginButton"
+        android:visibility="gone" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layout_weight="30"
+        android:gravity="bottom|center_horizontal"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/logoImageView"
+            android:src="@drawable/logo"
+            android:layout_weight="70"
+            android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:gravity="bottom"
+        android:focusableInTouchMode="true"
+        >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/girislogo"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/usernameEditText"
+            android:layout_marginRight="36dp"
+            android:layout_marginEnd="36dp"
+            android:hint="E-mail"
+            android:fontFamily="sans-serif-light"
+            android:textColorHint="#eaeaea"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/passwordEditText"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageView2"
+            android:src="@drawable/sifrelogo"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordEditText"
+            android:layout_marginRight="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:hint="Sifre"
+            android:fontFamily="sans-serif-light"
+            android:textColorHint="#eaeaea"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/imageButton"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_weight="11">
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/imageButton"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:background="@drawable/button_border2"
+            android:text="Giris Yap"
+            android:fontFamily="sans-serif"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:layout_height="55dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="14"
+        android:gravity="top|center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sifremi Unuttum"
+            android:id="@+id/forgotButton"
+            android:fontFamily="sans-serif-light"
+            android:textSize="18sp"
+            android:textColor="#eaeaea"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_weight="22">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/linearLayout">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@drawable/incecizgi"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="veya"
+                android:id="@+id/textView4"
+                android:textSize="14sp"
+                android:textColor="#eaeaea"
+                android:fontFamily="sans-serif-light"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4"
+                android:src="@drawable/incecizgi"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+
+            <ImageButton
+                android:id="@+id/fbButton"
+                android:background="@drawable/facebooklogin"
+                android:layout_weight="50"
+                android:layout_marginRight="10dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"/>
+
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:id="@+id/googleButton"
+                android:background="@drawable/googlelogin"
+                android:layout_weight="50"
+                android:layout_height="60dp"
+                android:clickable="true"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:text="Henuz hesabiniz yok mu?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textSize="14sp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="14"
+        android:gravity="center_vertical|center_horizontal"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hemen Kayit Ol"
+            android:id="@+id/registerButton"
+            android:textColor="#fff"
+            android:fontFamily="sans-serif"
+            android:textSize="24sp"
+            android:layout_weight="50"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Misafir Girisi"
+            android:id="@+id/misafirButton"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:layout_weight="50"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
+
+</LinearLayout>
