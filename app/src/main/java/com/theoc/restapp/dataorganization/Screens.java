@@ -4,8 +4,12 @@ public enum Screens {
     HomeScreen,
     MapScreen,
     PointsScreen,
-    CampaingDetailScreen,
+    PointsDetailScreen,
     SurveyScreen,
     MenusScreen,
-    CafeDetailScreen
+    CafeDetailScreen,
+    CafeJoinScreen,
+    SSSScreen,
+    HakkimizdaScreen,
+    OneriScreen
 }

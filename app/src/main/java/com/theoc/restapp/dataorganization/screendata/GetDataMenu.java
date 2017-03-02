@@ -347,12 +347,13 @@ public class GetDataMenu extends GetDataFromLocal implements MenuInterface {
     public void setValues(String name, int count, String price, String point, int type, String category) {
         if (type == 0) {
             if (sepetDict.containsKey(name)) {
-                Toast.makeText(a, "Ürün sipariş listenizde mevcut\nMiktarı değiştirmek için sipariş listenizi kullanın", Toast.LENGTH_SHORT).show();
+                Toast.makeText(a, name + " sipariş listenizde mevcut\nMiktarı değiştirmek için sipariş listenizi kullanın", Toast.LENGTH_LONG).show();
             } else {
                 sepetDict.put(name, count);
                 sepetDictPrice.put(name, price);
                 sepetDictPoint.put(name, point);
                 sepetDictCategory.put(name, category);
+                Toast.makeText(a, name + " sipariş listenize eklendi", Toast.LENGTH_LONG).show();
             }
         } else {
             if (count == 0) {

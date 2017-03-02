@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.barcode.ReadBarcode;
 import com.theoc.restapp.dataorganization.screendata.GetDataMenu;
 import com.theoc.restapp.helper.MenuInterface;
@@ -124,6 +126,12 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.MenusScreen);
     }
 
     @Override

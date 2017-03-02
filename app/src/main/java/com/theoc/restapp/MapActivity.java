@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.screendata.GetDataMap;
 import com.theoc.restapp.helper.FusedLocationReceiver;
 import com.theoc.restapp.helper.GoogleLocationClass;
@@ -230,10 +231,10 @@ public class MapActivity extends AppCompatActivity
         uiSettings.setMapToolbarEnabled(false);
         uiSettings.setCompassEnabled(false);
     }
-
     @Override
     protected void onResume() {
         super.onResume();
+        GeneralSync.set_screen(Screens.MapScreen);
         googleLocationClass = new GoogleLocationClass(this, new FusedLocationReceiver() {
             @Override
             public void onLocationChanged() {

@@ -20,6 +20,8 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 
 public class CafeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -51,6 +53,12 @@ public class CafeActivity extends AppCompatActivity implements OnMapReadyCallbac
         cafeTextView.setText("Aasfsagıasgasgjsag asuaıugsa" +
                 " ashbfaısuhfuıas naga gsankgn ganngsa lkasgasnlgaskl" +
                 " lasngsanglkjasn anslgnaa gagsakasgkan");  // data.get_cafe_detail();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.CafeDetailScreen);
     }
 
     @Override

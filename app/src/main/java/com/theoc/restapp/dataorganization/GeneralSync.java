@@ -3,11 +3,23 @@ package com.theoc.restapp.dataorganization;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+
+import com.theoc.restapp.AnketActivity;
+import com.theoc.restapp.CafeActivity;
+import com.theoc.restapp.CafeJoinActivity;
+import com.theoc.restapp.MapActivity;
+import com.theoc.restapp.MenuActivity;
+import com.theoc.restapp.MyPointsActivity;
+import com.theoc.restapp.MyPointsDetailActivity;
 import com.theoc.restapp.extendclass.DataConnections.ServConnection;
 import com.theoc.restapp.extendclass.DataProcess.GetDataFromLocal;
 import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.helper.FusedLocationReceiver;
 import com.theoc.restapp.helper.GoogleLocationClass;
+import com.theoc.restapp.sidemenu.HakkimizdaActivity;
+import com.theoc.restapp.sidemenu.OneriActivity;
+import com.theoc.restapp.sidemenu.SSSActivity;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +29,7 @@ public class GeneralSync extends GetDataFromLocal {
     public static boolean synced;
     public static boolean on_general_sync;
     public static Screens onthescreen;
+    public static Activity currentactivity;
 
     public static int id = 0; //user id
     public static String location_city = "Konya";
@@ -139,6 +152,43 @@ public class GeneralSync extends GetDataFromLocal {
 
     public static void set_screen(Screens s){
         onthescreen=s;
+        switch (onthescreen) {
+            case HomeScreen:
+                currentactivity = new HomeActivity();
+                break;
+            case MapScreen:
+                currentactivity = new MapActivity();
+                break;
+            case PointsScreen:
+                currentactivity = new MyPointsActivity();
+                break;
+            case PointsDetailScreen:
+                currentactivity = new MyPointsDetailActivity();
+                break;
+            case CafeDetailScreen:
+                currentactivity = new CafeActivity();
+                break;
+            case CafeJoinScreen:
+                currentactivity = new CafeJoinActivity();
+                break;
+            case MenusScreen:
+                currentactivity = new MenuActivity();
+                break;
+            case SurveyScreen:
+                currentactivity = new AnketActivity();
+                break;
+            case SSSScreen:
+                currentactivity = new SSSActivity();
+                break;
+            case HakkimizdaScreen:
+                currentactivity = new HakkimizdaActivity();
+                break;
+            case OneriScreen:
+                currentactivity = new OneriActivity();
+                break;
+            default:
+                break;
+        }
 
     }
     public Activity get_activty(){

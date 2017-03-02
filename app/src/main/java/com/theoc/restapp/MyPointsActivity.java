@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.screendata.GetDataPoints;
 
 public class MyPointsActivity extends AppCompatActivity
@@ -74,6 +75,12 @@ public class MyPointsActivity extends AppCompatActivity
 
         listView = (ListView) findViewById(R.id.listView);
         start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.PointsScreen);
     }
 
     @Override

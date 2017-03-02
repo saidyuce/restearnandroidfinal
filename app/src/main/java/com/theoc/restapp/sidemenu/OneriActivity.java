@@ -21,6 +21,7 @@ import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.R;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
@@ -56,6 +57,12 @@ public class OneriActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
         SegmentedGroup segmentedGroup = (SegmentedGroup) findViewById(R.id.segmented);
         segmentedGroup.check(R.id.button21);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.OneriScreen);
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.SocketMessage;
 import com.theoc.restapp.dataorganization.barcode.ReadBarcode;
 import com.theoc.restapp.dataorganization.screendata.GetDataCafeJoin;
@@ -73,21 +74,24 @@ public class CafeJoinActivity extends AppCompatActivity {
         }else {
 
 
-            Toast.makeText(this.getBaseContext(),ReadBarcode.durum,Toast.LENGTH_LONG).show();
-            LoginActivity.socket_message.oturum_Ac(ReadBarcode.durum,ReadBarcode.cafe_id+"", GeneralSync.id+"");
+            Toast.makeText(this.getBaseContext(), ReadBarcode.durum, Toast.LENGTH_LONG).show();
+            LoginActivity.socket_message.oturum_Ac(ReadBarcode.durum, ReadBarcode.cafe_id + "", GeneralSync.id + "");
 
-            cafe_id = ReadBarcode.cafe_id+"";
+            cafe_id = ReadBarcode.cafe_id + "";
             getDataCafeJoin = new GetDataCafeJoin(this, Integer.parseInt(cafe_id));
             findViewById(R.id.textView35).setOnClickListener(getDataCafeJoin.onClickListener_textview);
             mainTextView = (TextView) findViewById(R.id.mainTextView);
-            ımageView=(ImageView)findViewById(R.id.imageView11);
+            ımageView = (ImageView) findViewById(R.id.imageView11);
             getDataCafeJoin.start_paralel();
 
             Log.v("TEMPPOINT=", String.valueOf(ReadBarcode.temp_point));
         }
+    }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.CafeJoinScreen);
     }
 
     @Override

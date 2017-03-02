@@ -123,7 +123,7 @@ public class SocketMessage {
                                 data.getString("cafe_kul_id")+"-"+
                                 data.getString("not")+"-"+
                                 data.getString("temp_point")+"-");
-                        Toast.makeText(a, "Sipariş onaylandı", Toast.LENGTH_LONG).show();
+                        Toast.makeText(GeneralSync.currentactivity, "Sipariş onaylandı", Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         return;
                     }
@@ -159,6 +159,7 @@ public class SocketMessage {
                              data.getString("kullanilan_puan")+"-"+
                              data.getString("kazanilan_puan")+"-"+
                              data.getString("odeme_tipi")+"-");
+                     Toast.makeText(GeneralSync.currentactivity, "Oturum kapatıldı", Toast.LENGTH_LONG).show();
                  } catch (JSONException e) {
                         return;
                     }

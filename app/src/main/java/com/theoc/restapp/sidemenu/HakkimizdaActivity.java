@@ -2,17 +2,12 @@ package com.theoc.restapp.sidemenu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +16,7 @@ import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.R;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
 
 public class HakkimizdaActivity extends AppCompatActivity {
@@ -55,6 +51,12 @@ public class HakkimizdaActivity extends AppCompatActivity {
         });
 
         ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.HakkimizdaScreen);
     }
 
     @Override

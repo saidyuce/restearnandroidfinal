@@ -20,6 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.screendata.GetDataPointsDetail;
 
 public class MyPointsDetailActivity extends AppCompatActivity {
@@ -50,8 +52,8 @@ public class MyPointsDetailActivity extends AppCompatActivity {
         listView.setDivider(null);
         listView.setDividerHeight(0);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        final ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, point); // desired degree
-        animation.setDuration (1500); //in milliseconds
+        final ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, point);
+        animation.setDuration (1500);
         animation.setInterpolator (new DecelerateInterpolator());
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -66,6 +68,12 @@ public class MyPointsDetailActivity extends AppCompatActivity {
     public void start(){
         GetDataPointsDetail getDataPointsDetail=new GetDataPointsDetail(this, cafe_id);
         getDataPointsDetail.start_paralel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.PointsDetailScreen);
     }
 
     @Override

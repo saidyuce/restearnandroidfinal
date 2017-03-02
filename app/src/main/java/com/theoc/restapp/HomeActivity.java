@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
 import com.theoc.restapp.dataorganization.SocketMessage;
 import com.theoc.restapp.dataorganization.barcode.ConnectionPc;
@@ -136,6 +137,12 @@ public class HomeActivity extends AppCompatActivity {
         //get user id and city
         GeneralSync generalSync=new GeneralSync(this);
         generalSync.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.HomeScreen);
     }
 
     @Override

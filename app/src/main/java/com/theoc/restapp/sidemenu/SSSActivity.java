@@ -21,6 +21,7 @@ import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.R;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
+import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
 
 public class SSSActivity extends AppCompatActivity {
@@ -54,6 +55,12 @@ public class SSSActivity extends AppCompatActivity {
         });
 
         ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GeneralSync.set_screen(Screens.SSSScreen);
     }
 
     @Override
