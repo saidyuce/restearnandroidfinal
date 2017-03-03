@@ -123,8 +123,7 @@ public class SepetDialog extends Dialog {
 
     private void notDialog(final boolean prize) {
         android.support.v7.app.AlertDialog.Builder builder2 = new android.support.v7.app.AlertDialog.Builder(context);
-        final EditText input = new EditText(context);
-        input.setLayoutParams(new ViewGroup.LayoutParams(200, 100));
+        final View layout=this.getLayoutInflater().inflate(R.layout.forgot_dialog, null);
         builder2.setTitle("Sipariş Notu")
                 .setNegativeButton("İPTAL ET", new DialogInterface.OnClickListener() {
                     @Override
@@ -135,10 +134,10 @@ public class SepetDialog extends Dialog {
                 .setPositiveButton("GÖNDER", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        gonder(prize, input.getText().toString());
+                        gonder(prize, ((EditText) layout.findViewById(R.id.forgotEditText)).getText().toString());
                     }
                 })
-                .setView(input)
+                .setView(layout)
                 .show();
     }
 

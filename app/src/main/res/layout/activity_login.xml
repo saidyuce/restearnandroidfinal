@@ -67,6 +67,7 @@
             android:layout_marginEnd="36dp"
             android:hint="E-mail"
             android:fontFamily="sans-serif-light"
+            android:backgroundTint="#eaeaea"
             android:textColorHint="#eaeaea"
             android:layout_marginLeft="7dp"
             android:layout_marginStart="7dp"
@@ -99,8 +100,9 @@
             android:layout_marginEnd="36dp"
             android:layout_marginLeft="7dp"
             android:layout_marginStart="7dp"
-            android:hint="Sifre"
+            android:hint="Şifre"
             android:fontFamily="sans-serif-light"
+            android:backgroundTint="#eaeaea"
             android:textColorHint="#eaeaea"
             android:maxLines="1"
             android:singleLine="true"
@@ -121,7 +123,7 @@
             android:layout_marginLeft="36dp"
             android:layout_marginRight="36dp"
             android:background="@drawable/button_border2"
-            android:text="Giris Yap"
+            android:text="GİRİŞ YAP"
             android:fontFamily="sans-serif"
             android:textColor="#ffffff"
             android:textSize="16sp"
@@ -138,7 +140,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sifremi Unuttum"
+            android:text="Şifremi Unuttum"
             android:id="@+id/forgotButton"
             android:fontFamily="sans-serif-light"
             android:textSize="18sp"
@@ -176,8 +178,6 @@
                 android:textSize="14sp"
                 android:textColor="#eaeaea"
                 android:fontFamily="sans-serif-light"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 />
 
             <ImageView
@@ -221,10 +221,12 @@
     </RelativeLayout>
 
     <TextView
-        android:text="Henuz hesabiniz yok mu?"
+        android:text="Henüz hesabınız yok mu?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#eaeaea"
         android:textSize="14sp"
         android:gravity="center" />
 
@@ -240,7 +242,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hemen Kayit Ol"
+            android:text="Hemen Kayıt Ol"
             android:id="@+id/registerButton"
             android:textColor="#fff"
             android:fontFamily="sans-serif"
@@ -251,7 +253,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Misafir Girisi"
+            android:text="Misafir Girişi"
             android:id="@+id/misafirButton"
             android:fontFamily="sans-serif-light"
             android:textColor="#fff"

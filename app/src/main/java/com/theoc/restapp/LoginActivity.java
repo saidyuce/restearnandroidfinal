@@ -5,16 +5,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -130,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.misafirButton:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Misafir Girisi")
+                builder.setTitle("Misafir Girişi")
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -143,27 +148,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 misafir_girisi();
                             }
                         })
-                        .setMessage("Misafir girisi yapmak uzeresiniz. Bu surecte bircok ozellik devre disi olacak fakat uygulama hakkinda genel bir fikir elde edebileceksiniz")
+                        .setMessage("Misafir girişi yapmak üzeresiniz. Bu süreçte birçok özellik devre dışı olacak fakat uygulama hakkında genel bir fikir elde edebileceksiniz")
                         .show();
                 break;
             case R.id.forgotButton:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-                final EditText input = new EditText(this);
-                builder2.setTitle("Sifremi unuttum")
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                final View layout=this.getLayoutInflater().inflate(R.layout.forgot_dialog, null);
+
+                builder2.setTitle("Şifremi unuttum")
+                        .setNegativeButton("İptal", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
                         })
-                        .setPositiveButton("Gonder", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Gönder", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                sifremi_unuttum(input.getText().toString());
+                                sifremi_unuttum(((EditText) layout.findViewById(R.id.forgotEditText)).getText().toString());
                             }
                         })
-                        .setView(input)
-                        .setMessage("E-mail adresinize sifrenizi yenilemeniz icin bir mail gonderilecek")
+                        .setView(layout)
+                        .setMessage("E-mail adresinize şifrenizi yenilemeniz için bir mail gönderilecek")
                         .show();
                         
                 break;
@@ -180,11 +186,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void sifre_server_cevabı(KayitType kayitType) {
         if (kayitType == KayitType.var) {
-            Toast.makeText(this, "E-mail adresinize sifrenizi yenilemeniz icin bir mail gonderildi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "E-mail adresinize şifrenizi yenilemeniz için bir mail gönderildi", Toast.LENGTH_SHORT).show();
         } else if (kayitType == KayitType.yok) {
-            Toast.makeText(this, "Girdiginiz e-mail adresine kayitli bir kullanici bulunamadi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Girdiğiniz e-mail adresine kayıtlı bir kullanıcı bulunamadı", Toast.LENGTH_SHORT).show();
         } else if (kayitType == KayitType.serversorunu) {
-            Toast.makeText(this, "Bir sunucu hatasi olustu. Lutfen tekrar deneyin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bir sunucu hatası oluştu. Lütfen tekrar deneyin", Toast.LENGTH_SHORT).show();
         }
     }
 
