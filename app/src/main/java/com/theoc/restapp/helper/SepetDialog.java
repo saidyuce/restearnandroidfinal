@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SepetDialog extends Dialog {
+public class SepetDialog extends Dialog implements SepetInterface, SepetAdapterInterface{
 
     Context context;
     Map<String, Integer> sepetDict;
@@ -43,6 +43,14 @@ public class SepetDialog extends Dialog {
     GetDataMenu data;
     SendSiparis sendSiparis;
     String user_point = "";
+    double toplam = 0.0;
+    double derece = 0.0;
+    TextView dereceTextView;
+    TextView toplamTextView;
+    SepetAdapter adapter;
+    ListView listView;
+    SepetInterface sepetInterface;
+
     public SepetDialog(Context context, Map<String, Integer> sepetDict, Map<String, String> sepetDictPrice, Map<String, String> sepetDictPoint, Map<String, String> sepetDictCategory, GetDataMenu data, String user_point) {
         super(context);
         this.context = context;
@@ -66,19 +74,30 @@ public class SepetDialog extends Dialog {
                 w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             }
         }
-
-        ListView listView = (ListView) findViewById(R.id.listView);
-        SepetAdapter adapter = new SepetAdapter(context, sepetDict, sepetDictPrice, data, sepetDictPoint, sepetDictCategory);
+        sepetInterface = new SepetInterface() {
+            @Override
+            public void setValues(double price, double point, boolean type) {
+                if (type) {
+                    toplam += price;
+                    derece += point;
+                } else {
+                    toplam -= price;
+                    derece -= point;
+                }
+                toplamTextView.setText("Toplam: " + toplam);
+                dereceTextView.setText("Derece: " + derece);
+            }
+        };
+        listView = (ListView) findViewById(R.id.listView);
+        adapter = new SepetAdapter(context, sepetDict, sepetDictPrice, data, sepetDictPoint, sepetDictCategory, sepetInterface);
         listView.setAdapter(adapter);
-        TextView dereceTextView = (TextView) findViewById(R.id.dereceTextView);
-        double derece = 0.0;
+        dereceTextView = (TextView) findViewById(R.id.dereceTextView);
         for (String point: sepetDictPoint.values()) {
             derece += Double.parseDouble(point);
         }
         dereceTextView.setText("Derece: " + derece);
 
-        TextView toplamTextView = (TextView) findViewById(R.id.toplamTextView);
-        double toplam = 0.0;
+        toplamTextView = (TextView) findViewById(R.id.toplamTextView);
         for (String price: sepetDictPrice.values()) {
             toplam += Double.parseDouble(price);
         }
@@ -157,5 +176,25 @@ public class SepetDialog extends Dialog {
         sendSiparis.send_siparis(siparises);
         LoginActivity.socket_message.siparis_ver(ReadBarcode.cafe_id + "", GeneralSync.id + "");
         SepetDialog.this.dismiss();
+    }
+
+    @Override
+    public void setValues(double price, double point, boolean type) {}
+
+    @Override
+    public void refreshAdapter(Map<String, Integer> sepetDict, Map<String, String> sepetDictPrice, Map<String, String> sepetDictPoint, Map<String, String> sepetDictCategory) {
+        Log.d("adapterinterface", "called");
+        this.adapter = null;
+        this.sepetDict.clear();
+        this.sepetDictPrice.clear();
+        this.sepetDictPoint.clear();
+        this.sepetDictCategory.clear();
+        this.sepetDict.putAll(sepetDict);
+        this.sepetDictPrice.putAll(sepetDictPrice);
+        this.sepetDictPoint.putAll(sepetDictPoint);
+        this.sepetDictCategory.putAll(sepetDictCategory);
+        adapter = new SepetAdapter(context, sepetDict, sepetDictPrice, data, sepetDictPoint, sepetDictCategory, sepetInterface);
+        listView.setAdapter(null);
+        listView.setAdapter(adapter);
     }
 }

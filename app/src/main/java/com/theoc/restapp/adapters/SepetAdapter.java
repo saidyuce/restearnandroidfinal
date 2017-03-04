@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.theoc.restapp.R;
 import com.theoc.restapp.helper.MenuInterface;
+import com.theoc.restapp.helper.SepetInterface;
 
 import java.util.Map;
 
@@ -23,14 +24,16 @@ public class SepetAdapter extends BaseAdapter {
     Map<String, String> sepetDictCategory;
     Object[] sepetDictCopy;
     MenuInterface menuInterface;
+    SepetInterface sepetInterface;
 
-    public SepetAdapter(Context context, Map<String, Integer> sepetDict, Map<String, String> sepetDictPrice, MenuInterface menuInterface, Map<String, String> sepetDictPoint, Map<String, String> sepetDictCategory) {
+    public SepetAdapter(Context context, Map<String, Integer> sepetDict, Map<String, String> sepetDictPrice, MenuInterface menuInterface, Map<String, String> sepetDictPoint, Map<String, String> sepetDictCategory, SepetInterface sepetInterface) {
         this.context = context;
         this.sepetDict = sepetDict;
         this.sepetDictPrice = sepetDictPrice;
         this.sepetDictPoint = sepetDictPoint;
         this.sepetDictCategory = sepetDictCategory;
         this.menuInterface = menuInterface;
+        this.sepetInterface = sepetInterface;
         sepetDictCopy = sepetDictPrice.keySet().toArray();
     }
     @Override
@@ -71,6 +74,9 @@ public class SepetAdapter extends BaseAdapter {
         holder.addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sepetInterface.setValues(Double.parseDouble(holder.priceTextView.getText().toString()) / Integer.parseInt(holder.amountTextView.getText().toString()),
+                        Double.parseDouble(sepetDictPoint.get(holder.foodTextView.getText().toString())) / Integer.parseInt(holder.amountTextView.getText().toString()),
+                        true);
                 menuInterface.setValues(holder.foodTextView.getText().toString(),
                         Integer.parseInt(holder.amountTextView.getText().toString()) + 1,
                         String.valueOf(Double.parseDouble(holder.priceTextView.getText().toString()) + Double.parseDouble(holder.priceTextView.getText().toString()) / Double.parseDouble(holder.amountTextView.getText().toString())),
@@ -84,6 +90,9 @@ public class SepetAdapter extends BaseAdapter {
         holder.removeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sepetInterface.setValues(Double.parseDouble(holder.priceTextView.getText().toString()) / Integer.parseInt(holder.amountTextView.getText().toString()),
+                        Double.parseDouble(sepetDictPoint.get(holder.foodTextView.getText().toString())) / Integer.parseInt(holder.amountTextView.getText().toString()),
+                        false);
                 menuInterface.setValues(holder.foodTextView.getText().toString(),
                         Integer.parseInt(holder.amountTextView.getText().toString()) - 1,
                         String.valueOf(Double.parseDouble(holder.priceTextView.getText().toString()) - Double.parseDouble(holder.priceTextView.getText().toString()) / Double.parseDouble(holder.amountTextView.getText().toString())),

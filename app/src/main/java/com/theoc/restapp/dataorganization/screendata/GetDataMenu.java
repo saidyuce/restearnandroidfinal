@@ -3,6 +3,7 @@ package com.theoc.restapp.dataorganization.screendata;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.theoc.restapp.MenuActivity;
@@ -10,6 +11,7 @@ import com.theoc.restapp.adapters.MenuPagerAdapter;
 import com.theoc.restapp.extendclass.DataConnections.ServConnection;
 import com.theoc.restapp.extendclass.DataProcess.GetDataFromLocal;
 import com.theoc.restapp.helper.MenuInterface;
+import com.theoc.restapp.helper.SepetAdapterInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -357,10 +359,18 @@ public class GetDataMenu extends GetDataFromLocal implements MenuInterface {
             }
         } else {
             if (count == 0) {
+                Log.d("count", "zero");
                 sepetDict.remove(name);
                 sepetDictPrice.remove(name);
                 sepetDictPoint.remove(name);
                 sepetDictCategory.remove(name);
+                SepetAdapterInterface sepetAdapterInterface = new SepetAdapterInterface() {
+                    @Override
+                    public void refreshAdapter(Map<String, Integer> sepetDict, Map<String, String> sepetDictPrice, Map<String, String> sepetDictPoint, Map<String, String> sepetDictCategory) {
+
+                    }
+                };
+                sepetAdapterInterface.refreshAdapter(sepetDict, sepetDictPrice, sepetDictPoint, sepetDictCategory);
                 // burada adaptera notifyDataSetChanged yapmak lazım ki miktarı 0 olan ürün listeden silinsin
             } else {
                 sepetDict.put(name, count);
