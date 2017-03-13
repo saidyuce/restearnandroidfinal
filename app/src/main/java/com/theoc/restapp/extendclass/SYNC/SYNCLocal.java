@@ -279,7 +279,7 @@ if(ReadBarcode.durum.equals("fail")||ReadBarcode.durum.equals("wrong_barcode")){
                 try {
 
 
-                    update_campaing(jsonObject1.getJSONObject("campaing_data").getJSONArray("campaing"+ GeneralSync.location_city));
+                    update_campaing(jsonObject1.getJSONObject("campaing_data").getJSONArray("campaing"+ GeneralSync.location_city.toLowerCase()));
                 }catch (Exception e){
 
 

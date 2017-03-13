@@ -120,15 +120,10 @@ public class GetDataCafeJoin extends GetDataFromLocal {
     }
     public String get_cafe_point() {
         try {
-
             return main_data.getJSONArray("cafe").getJSONObject(0).getInt("point")+"";
-
-
-
         } catch (JSONException e) {
-            e.printStackTrace();
+            return "0";
         }
-        return null;
     }
 
     private void set_gui(){
