@@ -43,7 +43,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="Genel Öneri"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     style="@style/RadioButton"
                     android:layout_weight="25"/>
 
@@ -52,7 +52,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="Mekan Öner"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     style="@style/RadioButton"
                     android:layout_weight="25"/>
 
@@ -61,7 +61,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="Özellik Öner"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     style="@style/RadioButton"
                     android:layout_weight="25"/>
 
@@ -91,7 +91,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textMultiLine"
                 android:ems="10"
                 android:layout_below="@+id/textView2"
                 android:layout_alignLeft="@+id/textView2"
@@ -103,8 +103,7 @@
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-light"
-                android:textAlignment="center"
-                android:gravity="top|center_horizontal"/>
+                android:gravity="top"/>
 
         </RelativeLayout>
 

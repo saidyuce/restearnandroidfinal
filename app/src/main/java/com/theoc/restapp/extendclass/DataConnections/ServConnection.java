@@ -41,13 +41,14 @@ public class ServConnection {
 
 
     public static int port_no=80;
-    public static String ip="restearnserver.tk";
+    public static String ip="restearnserver.com";
     public static String subdomain_file="RestUpp/KontrolPaneli/caferesim/";
     public static String get_file_url(){
         return "http://"+ip+"/"+subdomain_file;
     }
 
-    private static String subdomain="RestUpp";
+    private static String subdomain="RestUpp" +
+            "";
     private static String    server_ip="http://"+ip+"/"+subdomain;
 
 

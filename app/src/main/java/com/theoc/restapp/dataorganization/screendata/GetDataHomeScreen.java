@@ -42,8 +42,8 @@ import java.util.Map;
 public class GetDataHomeScreen extends GetDataFromLocal {
 
     JSONObject main_data, ana_data, filter_data;
-    String[] listItems = {"Hepsini Göster",
-            "Restarn",
+    String[] listItems = {"Tümünü Göster",
+            "Restearn",
             "Happy Hour",
             "Ürün"};
 
@@ -387,6 +387,9 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                 ((HomeActivity) a).listView.setAdapter(adapter_campaing);
             } else {
                 String choice = listItems[pos];
+                if (choice.equalsIgnoreCase("Restearn")) {
+                    choice = "Restarn";
+                }
                 int size = ana_data.getJSONArray("campaing").length();
                 JSONArray jsonList = new JSONArray();
                 boolean flag;
@@ -446,8 +449,6 @@ public class GetDataHomeScreen extends GetDataFromLocal {
             View row = convertView;
             row = inflater.inflate(layoutID, parent, false);
             TextView filterTextView = (TextView) row.findViewById(R.id.filterTextView);
-            ImageView filterImageView = (ImageView) row.findViewById(R.id.filterImageView);
-            // buraya res/drawable'dan koyacağız kategori ikonlarını
 
             filterTextView.setText(listItems[position]);
             return row;

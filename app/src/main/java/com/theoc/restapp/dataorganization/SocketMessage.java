@@ -35,7 +35,7 @@ public class SocketMessage {
             sending.put("user_id",user_id);
 
             try {
-                mSocket = IO.socket("http://restearnserver.tk:65080");
+                mSocket = IO.socket("http://restearnserver.com:65080");
             } catch (URISyntaxException e) {}
 
 
@@ -64,7 +64,7 @@ public class SocketMessage {
 
             if (mSocket==null){
                 try {
-                    mSocket = IO.socket("http://restearnserver.tk:65080");
+                    mSocket = IO.socket("http://restearnserver.com:65080");
                     mSocket.connect();
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
@@ -93,7 +93,7 @@ public class SocketMessage {
             sending.put("push_token", push_token);
 
             if (mSocket == null) {
-                mSocket = IO.socket("http://restearnserver.tk:65080");
+                mSocket = IO.socket("http://restearnserver.com:65080");
                 mSocket.connect();
             }
 

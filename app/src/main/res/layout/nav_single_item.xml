@@ -25,7 +25,7 @@
         android:text="New Text"
         android:id="@+id/navTextView"
         android:textColor="#fff"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:layout_weight="80"
         android:gravity="center"
         android:layout_gravity="center"
