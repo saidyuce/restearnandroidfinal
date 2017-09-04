@@ -80,7 +80,7 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         if (GeneralSync.location_city == null)
             q_loc="";
         else{
-            q_loc="and cafe.city= '"+GeneralSync.location_city.toLowerCase()+"'";
+           // q_loc="and cafe.city= '"+GeneralSync.location_city.toLowerCase()+"'";
         }
 
         super.result_json = new JSONObject();
@@ -99,7 +99,7 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                     "cafe.y_,"+
                     "campaing.category as campaing_category,"+
                     "cafe.category as cafe_category " +
-                    "FROM " + "campaing JOIN cafe on campaing.cafe_id=cafe.id where cafe.preminium_type=0 "+q_loc + " ORDER BY distance ASC");
+                    "FROM " + "campaing JOIN cafe on campaing.cafe_id=cafe.id  "+q_loc + " ORDER BY distance ASC");
         }else if(i==1){
             //for preminium
             super.select_and_response_json("campaing", "SELECT  " +
@@ -114,7 +114,7 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                     "cafe.y_,"+
                     "campaing.category as campaing_category,"+
                     "cafe.category as cafe_category " +
-                    "FROM " + "campaing JOIN cafe on campaing.cafe_id=cafe.id where cafe.preminium_type=0 "+q_loc + " ORDER BY distance ASC");
+                    "FROM " + "campaing JOIN cafe on campaing.cafe_id=cafe.id  "+q_loc + " ORDER BY distance ASC");
         }
 
     }

@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import com.theoc.restapp.MyPointsActivity;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -41,13 +43,15 @@ public class ServConnection {
 
 
     public static int port_no=80;
-    public static String ip="restearnserver.com";
+    public static String ip="restearndev.xyz";
     public static String subdomain_file="RestUpp/KontrolPaneli/caferesim/";
     public static String get_file_url(){
         return "http://"+ip+"/"+subdomain_file;
     }
 
     private static String subdomain="RestUpp" +
+            "";
+    private static String subdomain2="restearn" +
             "";
     private static String    server_ip="http://"+ip+"/"+subdomain;
 
@@ -79,7 +83,7 @@ public class ServConnection {
         StringBuilder sb;
         String s;
 
-        private error parameter_json(){
+        private error parameter_json(String name){
 
 
             try {
@@ -90,8 +94,12 @@ public class ServConnection {
                 //   se = new StringEntity(sending_parameter.toString());
 
                 //        httppost.setEntity(se);
+                String abc=sending_parameter.toString();
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("req", sending_parameter.toString()));
+
+                nameValuePairs.add(new BasicNameValuePair(name, sending_parameter.toString()));
+                Log.v("sending", abc);
+                Log.v("sending2", nameValuePairs.toString())
                 // Use UrlEncodedFormEntity to send in proper format which we need
              ;
                 httppost.setEntity(   new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
@@ -175,8 +183,10 @@ public class ServConnection {
                 }
 
                 if (outputType==output_type.JSONOUT) {
+                    Log.v("RESPONSE: ", sb.toString()+"");
                     response_json = new JSONObject(sb.toString());
                     Log.v("RESPONSE JSON: ", response_json+"");
+
                     parser_to_object();
 
                 }else if (outputType==output_type.STROUT){
@@ -225,7 +235,7 @@ public class ServConnection {
                 else return eRRor;
             }
             else if (inputType==input_type.JSON_IMPUT){
-                eRRor=parameter_json();
+                eRRor=parameter_json(input[0].toString());
                 if (eRRor==error.SUCCES){
                     eRRor=execute();
                     if (eRRor==error.SUCCES){
@@ -308,12 +318,22 @@ public class ServConnection {
     private MyTask myTask;
 
     protected  void onStart(input_type i,output_type o,String php_file_name){
-
+        server_ip="http://"+ip+"/"+subdomain;
         this.php_file_name=php_file_name;
         inputType=i;
         outputType=o;
         myTask=new MyTask();
-        myTask.execute("");
+        myTask.execute("req");
+        onprocessing();
+
+    }
+    protected  void onStartSubdomain2(input_type i,output_type o,String php_file_name){
+        server_ip="http://"+ip+"/"+subdomain2;
+        this.php_file_name=php_file_name;
+        inputType=i;
+        outputType=o;
+        myTask=new MyTask();
+        myTask.execute("message_sip");
         onprocessing();
 
     }

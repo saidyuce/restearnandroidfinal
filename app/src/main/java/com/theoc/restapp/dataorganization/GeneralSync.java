@@ -204,6 +204,7 @@ public class GeneralSync extends GetDataFromLocal {
         control_tables.put("points","(id INTEGER PRIMARY KEY    ,user_id INT,point INT,cafe_id INT);");
         control_tables.put("prize","(id INTEGER PRIMARY KEY    ,name TEXT,cafe_id INT);");
         control_tables.put("cafecoin","(id INTEGER PRIMARY KEY   ,cafe_id INT,coin DOUBLE);");
+        control_tables.put("free_point","(id INTEGER PRIMARY KEY    ,kul_id INT,point INT,cafe_id INT);");
 
         //    control_tables.put("menu","(id INT PRIMARY KEY NOT NULL,cafe_id INT,type TEXT);");
         //     control_tables.put("food","(id INT PRIMARY KEY NOT NULL,menu_id INT,name TEXT,cost DOUBLE);");

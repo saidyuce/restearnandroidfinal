@@ -1,6 +1,7 @@
 package com.theoc.restapp.extendclass.SYNC;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.theoc.restapp.dataorganization.GeneralSync;
@@ -67,6 +68,8 @@ public class SYNCLocal extends LocalConnection {
 
     JSONArray jsonarray;
     protected void execute_server_response(JSONObject jsonObject,String table_name){
+
+        Log.v("General senk1",jsonObject.toString());
 
         try {
             extra_response=new HashMap<>();
@@ -249,7 +252,14 @@ if(ReadBarcode.durum.equals("fail")||ReadBarcode.durum.equals("wrong_barcode")){
 
 
                 }
+                try {
 
+
+                    insert_free_points(jsonObject1.getJSONObject("free_point_data").getJSONArray("free_point"+GeneralSync.id));
+                }catch (Exception e){
+
+
+                }
 
             }catch (Exception e){
 
@@ -303,6 +313,14 @@ if(ReadBarcode.durum.equals("fail")||ReadBarcode.durum.equals("wrong_barcode")){
 
                 }
 
+                try {
+
+
+                    update_free_points(jsonObject1.getJSONObject("free_point_data").getJSONArray("free_point"+GeneralSync.id));
+                }catch (Exception e){
+
+
+                }
 
             }catch (Exception e){
 
@@ -596,7 +614,46 @@ if(ReadBarcode.durum.equals("fail")||ReadBarcode.durum.equals("wrong_barcode")){
             //cafe_exception
         }
     }
+    private void insert_free_points(JSONArray jsonarray){
 
+        try {
+
+            qu="";
+            for (int i=0;i<jsonarray.length();++i){
+
+                qu="insert into free_point (id,kul_id,cafe_id,point)  values(" +
+                        jsonarray.getJSONObject(i).getInt("id")+"," +
+                        jsonarray.getJSONObject(i).getInt("kul_id")+"," +
+                        jsonarray.getJSONObject(i).getInt("cafe_id")+"," +
+                        jsonarray.getJSONObject(i).getInt("point")+
+                        ");";
+                super.exec_and_response_excquery_write(qu);
+            }
+        }
+        catch (Exception e){
+            //cafe_exception
+        }
+    }
+    private void update_free_points(JSONArray jsonarray){
+
+        try {
+
+            qu="";
+            for (int i=0;i<jsonarray.length();++i){
+
+                qu="update free_point " +
+                        "set id="+       jsonarray.getJSONObject(i).getInt("id")+"," +
+                        "kul_id="+      jsonarray.getJSONObject(i).getInt("kul_id")+"," +
+                        "cafe_id="+        jsonarray.getJSONObject(i).getInt("cafe_id")+"," +
+                        "point="+        jsonarray.getJSONObject(i).getInt("point")+
+                        " where id="+jsonarray.getJSONObject(i).getInt("id")+";";
+                super.exec_and_response_excquery_write(qu);
+            }
+        }
+        catch (Exception e){
+            //cafe_exception
+        }
+    }
     private void update_menu(JSONArray jsonarray){
 
         try {

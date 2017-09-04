@@ -2,12 +2,14 @@ package com.theoc.restapp;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,6 +32,8 @@ import android.widget.Toast;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.dataorganization.Screens;
+import com.theoc.restapp.dataorganization.barcode.SiparisQRread;
+import com.theoc.restapp.dataorganization.screendata.GetDataFreePoint;
 import com.theoc.restapp.dataorganization.screendata.GetDataPoints;
 
 public class MyPointsActivity extends AppCompatActivity
@@ -74,8 +78,60 @@ public class MyPointsActivity extends AppCompatActivity
         });
 
         listView = (ListView) findViewById(R.id.listView);
-        start();
+       if(getIntent().getStringExtra("qrText")==null){
+
+           start();
+       }else {
+
+
+           qrReaded(getIntent().getStringExtra("qrText"));
+
+       }
+
     }
+
+
+
+    void qrReaded(String qrcode){
+
+
+        SiparisQRread qRread=new SiparisQRread(this);
+        qRread.read(qrcode);
+
+
+
+    }
+
+   public void OnQrSuccess(String response){
+
+       Log.v("sonnnn",response);
+
+       Dialog dialog=new Dialog(this);
+       dialog.setTitle("Puan kazandınız");
+
+       dialog.show();
+       start();
+
+
+
+    }
+  public  void OnQrError(String error){
+
+
+      Dialog dialog=new Dialog(this);
+      dialog.setTitle("Hata");
+
+      dialog.show();
+      start();
+
+
+  }
+
+
+
+
+
+
 
     @Override
     protected void onResume() {
@@ -109,8 +165,28 @@ public class MyPointsActivity extends AppCompatActivity
     }
 
     public void start(){
-        ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
+
+
+       //normal puan
+      /*  ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
         GetDataPoints getDataPoints=new GetDataPoints(this);
+        getDataPoints.start_paralel();*/
+
+        //free puan
+        ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
+        GetDataFreePoint getDataPoints=new GetDataFreePoint(this);
         getDataPoints.start_paralel();
+
     }
+
+
+
+
+
+
+
+
+
+
+
 }

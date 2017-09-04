@@ -28,7 +28,9 @@ public class QRActivity extends AppCompatActivity implements QRCodeReaderView.On
 
     @Override
     public void onQRCodeRead(String text, PointF[] points) {
-        Intent intent = new Intent(this, CafeJoinActivity.class);
+       // Intent intent = new Intent(this, CafeJoinActivity.class);
+        qrreader.getCameraManager().stopPreview();
+        Intent intent = new Intent(this,MyPointsActivity.class);
         intent.putExtra("qrText", text);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

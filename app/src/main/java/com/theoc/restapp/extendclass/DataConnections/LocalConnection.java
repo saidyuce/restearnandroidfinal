@@ -75,6 +75,7 @@ public class LocalConnection extends SQLiteOpenHelper{
     protected void select_and_response_json(String tablename,String query){
         try {
             //
+            Log.v("query",query);
             db=this.getReadableDatabase();
             cursor = db.rawQuery(query, null );
             resultSet     = new JSONArray();

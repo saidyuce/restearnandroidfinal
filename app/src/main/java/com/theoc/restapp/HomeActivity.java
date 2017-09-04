@@ -100,10 +100,10 @@ public class HomeActivity extends AppCompatActivity {
         midiconImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(HomeActivity.this, QRActivity.class);
-                startActivity(intent); //bu orjinal hali*/
-                Intent intent = new Intent(HomeActivity.this, CafeJoinActivity.class);
-                intent.putExtra("qrText", "{\"cafe\":\"3\",\"masa\":\"D14\"}");
+                Intent intent = new Intent(HomeActivity.this, QRActivity.class);
+                startActivity(intent); //bu orjinal hali
+                /*Intent intent = new Intent(HomeActivity.this, CafeJoinActivity.class);
+                intent.putExtra("qrText", "{\"cafe\":\"3\",\"masa\":\"D14\"}");*/
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
