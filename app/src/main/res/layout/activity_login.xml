@@ -66,6 +66,7 @@
             android:layout_marginRight="36dp"
             android:layout_marginEnd="36dp"
             android:hint="E-mail"
+            android:textSize="16sp"
             android:textColor="#ffffff"
             android:fontFamily="sans-serif-light"
             android:backgroundTint="#eaeaea"
@@ -94,22 +95,23 @@
             />
 
         <EditText
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/passwordEditText"
-            android:layout_marginRight="36dp"
             android:layout_marginEnd="36dp"
             android:layout_marginLeft="7dp"
+            android:layout_marginRight="36dp"
             android:layout_marginStart="7dp"
-            android:hint="Şifre"
-            android:textColor="#ffffff"
-            android:fontFamily="sans-serif-light"
             android:backgroundTint="#eaeaea"
-            android:textColorHint="#eaeaea"
+            android:fontFamily="sans-serif-light"
+            android:hint="Şifre"
+            android:inputType="textPassword"
             android:maxLines="1"
-            android:singleLine="true"
             android:nextFocusDown="@+id/imageButton"
-            />
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#eaeaea"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -145,7 +147,7 @@
             android:text="Şifremi Unuttum"
             android:id="@+id/forgotButton"
             android:fontFamily="sans-serif-light"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="#eaeaea"/>
 
     </LinearLayout>
@@ -177,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:text="veya"
                 android:id="@+id/textView4"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="#eaeaea"
                 android:fontFamily="sans-serif-light"
                 />
@@ -205,17 +207,17 @@
                 android:background="@drawable/facebooklogin"
                 android:layout_weight="50"
                 android:layout_marginRight="10dp"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:clickable="true"/>
 
 
             <ImageButton
-                android:layout_width="60dp"
+                android:layout_width="50dp"
                 android:id="@+id/googleButton"
                 android:background="@drawable/googlelogin"
                 android:layout_weight="50"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:clickable="true"/>
 
         </LinearLayout>
@@ -229,7 +231,7 @@
         android:id="@+id/textView5"
         android:fontFamily="sans-serif-light"
         android:textColor="#eaeaea"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:gravity="center" />
 
     <LinearLayout
@@ -248,7 +250,7 @@
             android:id="@+id/registerButton"
             android:textColor="#fff"
             android:fontFamily="sans-serif"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:layout_weight="50"
             android:gravity="center_vertical" />
 
@@ -259,7 +261,7 @@
             android:id="@+id/misafirButton"
             android:fontFamily="sans-serif-light"
             android:textColor="#fff"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:layout_weight="50"
             android:gravity="center_vertical" />
 

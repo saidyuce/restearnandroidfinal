@@ -16,9 +16,10 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:maxWidth="240dp"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@drawable/navarkaplan">
+        android:background="@drawable/arkaplan">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,8 +34,8 @@
 
                 <ImageView
                     android:id="@+id/navLogoImageView"
-                    android:layout_width="200dp"
-                    android:layout_height="48dp"
+                    android:layout_width="180dp"
+                    android:layout_height="42dp"
                     android:src="@drawable/logoplus"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
@@ -53,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:text="---"
                     android:id="@+id/navNameTextView"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/colorAccent"
                     android:layout_below="@+id/navCikisButton"
                     android:layout_centerHorizontal="true"

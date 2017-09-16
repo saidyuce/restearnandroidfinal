@@ -29,8 +29,10 @@ public class HomeDialog extends Dialog {
     String name;
     double cafe_x;
     double cafe_y;
+    String cafe_detail;
+    String large_image;
 
-    public HomeDialog(Context context, String type, String detail, String cafe_id, String logo, String name, double cafe_x, double cafe_y) {
+    public HomeDialog(Context context, String type, String detail, String cafe_id, String logo, String name, double cafe_x, double cafe_y, String cafe_detail, String large_image) {
         super(context);
         this.context = context;
         this.type = type;
@@ -40,6 +42,8 @@ public class HomeDialog extends Dialog {
         this.cafe_x = cafe_x;
         this.cafe_y = cafe_y;
         this.name = name;
+        this.cafe_detail = cafe_detail;
+        this.large_image = large_image;
     }
 
     @Override
@@ -59,10 +63,14 @@ public class HomeDialog extends Dialog {
         Button goButton = (Button) findViewById(R.id.goButton);
 
         mekanNameTextView.setText(name);
-        kampanyaTypeTextView.setText(type);
+        if (type.equalsIgnoreCase("Restarn")) {
+            kampanyaTypeTextView.setText("Restearn");
+        } else {
+            kampanyaTypeTextView.setText(type);
+        }
         kampanyaDetailTextView.setText(detail);
         Glide.with(context)
-                .load(logo)
+                .load("http://restearndev.xyz/RestUpp/KontrolPaneli/caferesim/" + logo)
                 .error(R.drawable.mypointsnargile)
                 .placeholder(R.drawable.placeholder)
                 .dontAnimate()
@@ -78,8 +86,11 @@ public class HomeDialog extends Dialog {
                 intent.putExtra("cafe_x", cafe_x);
                 intent.putExtra("cafe_y", cafe_y);
                 intent.putExtra("name", name);
+                intent.putExtra("cafe_detail", cafe_detail);
+                intent.putExtra("large_image", large_image);
                 activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 activity.startActivity(intent);
+                HomeDialog.this.dismiss();
             }
         });
 

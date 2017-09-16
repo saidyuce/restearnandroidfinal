@@ -33,22 +33,33 @@ JSONObject jj_temp;
 
 
         String state="";
+        String key="";
 
 
         try {
             state=response_json.getString("state");
         } catch (JSONException e) {
             e.printStackTrace();
-            loginActivity.sifre_server_cevabı(KayitType.serversorunu);
+            loginActivity.sifre_server_cevabı(KayitType.serversorunu, key);
         }
-       if (state.equals("var")){
-           loginActivity.sifre_server_cevabı(KayitType.var);
+        switch (state) {
+            case "var":
+                try {
+                    key = response_json.getString("key");
+                    loginActivity.sifre_server_cevabı(KayitType.var, key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    loginActivity.sifre_server_cevabı(KayitType.serversorunu, key);
+                }
 
-       }
-        else if (state.equals("yok")){
-           loginActivity.sifre_server_cevabı(KayitType.yok);
-       }
-        else   loginActivity.sifre_server_cevabı(KayitType.serversorunu);
+                break;
+            case "yok":
+                loginActivity.sifre_server_cevabı(KayitType.yok, key);
+                break;
+            default:
+                loginActivity.sifre_server_cevabı(KayitType.serversorunu, key);
+                break;
+        }
 
     }
     @Override

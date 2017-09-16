@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.R;
+import com.theoc.restapp.sidemenu.AyarlarActivity;
 import com.theoc.restapp.sidemenu.HakkimizdaActivity;
 import com.theoc.restapp.sidemenu.OneriActivity;
 import com.theoc.restapp.sidemenu.SSSActivity;
@@ -27,12 +28,12 @@ public class NavAdapter extends BaseAdapter {
             "Ayarlar"
     };
     private int[] images = {
-            R.drawable.navmekanim,
-            R.drawable.navhakkimizda,
-            R.drawable.navdegerlendir,
-            R.drawable.navsss,
-            R.drawable.navoneri,
-            R.drawable.navayarlar
+            R.drawable.kampanyalar,
+            R.drawable.hakkimizda,
+            R.drawable.degerlendir,
+            R.drawable.sss,
+            R.drawable.oneri,
+            R.drawable.ayarlar
     };
 
     private Context context;
@@ -82,13 +83,11 @@ public class NavAdapter extends BaseAdapter {
                         Activity activity0 = (Activity) context;
                         Intent intent0 = new Intent(context, HomeActivity.class);
                         activity0.startActivity(intent0);
-                        activity0.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
                     case 1:
                         Activity activity = (Activity) context;
                         Intent intent = new Intent(context, HakkimizdaActivity.class);
                         activity.startActivity(intent);
-                        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
                     case 2:
                         break;
@@ -96,15 +95,16 @@ public class NavAdapter extends BaseAdapter {
                         Activity activity2 = (Activity) context;
                         Intent intent3 = new Intent(context, OneriActivity.class);
                         activity2.startActivity(intent3);
-                        activity2.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
                     case 4:
-                        break;
-                    case 5:
                         Activity activity3 = (Activity) context;
                         Intent intent5 = new Intent(context, SSSActivity.class);
                         activity3.startActivity(intent5);
-                        activity3.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        break;
+                    case 5:
+                        Activity activity4 = (Activity) context;
+                        Intent intent6 = new Intent(context, AyarlarActivity.class);
+                        activity4.startActivity(intent6);
                         break;
                     default:
                         // do nothing

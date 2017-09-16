@@ -1,35 +1,33 @@
 {
   "project_info": {
-    "project_number": "952750291655",
-    "firebase_url": "https://restearn-59895.firebaseio.com",
-    "project_id": "restearn-59895",
-    "storage_bucket": "restearn-59895.appspot.com"
+    "project_number": "677947695618",
+    "project_id": "endless-terra-140914"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:952750291655:android:3906cb6d7369f414",
+        "mobilesdk_app_id": "1:677947695618:android:3906cb6d7369f414",
         "android_client_info": {
           "package_name": "com.theoc.restapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "952750291655-pcfha9aj6hfqnm85lm3f5ks2scejmf6j.apps.googleusercontent.com",
+          "client_id": "677947695618-ecqltsengbottfua28cct19gdf5n2ku6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.theoc.restapp",
-            "certificate_hash": "12A25F8B7B090C0E8CB726823274C86063B43732"
+            "certificate_hash": "a12376b2ac7d7acc56ab82956ba32ac9c7ef23f8"
           }
         },
         {
-          "client_id": "952750291655-m909rsgt9vunjt8s7ktntpcdl1u4c1jj.apps.googleusercontent.com",
+          "client_id": "677947695618-4lhs4u6j3npnq8b93mnc1dnd38iqgoph.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSHfpwndzkuh5Kn2hha0pFNK0V0GIgHO8"
+          "current_key": "AIzaSyB3OQ3_3IEONgnVFIpd4fJtKC3mxlKCF4g"
         }
       ],
       "services": {
@@ -37,16 +35,11 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "952750291655-m909rsgt9vunjt8s7ktntpcdl1u4c1jj.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

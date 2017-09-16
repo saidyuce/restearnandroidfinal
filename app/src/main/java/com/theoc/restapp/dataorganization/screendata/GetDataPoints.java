@@ -38,7 +38,7 @@ public class GetDataPoints extends GetDataFromLocal implements View.OnClickListe
                         "user_id," +
                         "cafe_id," +
                         "point," +
-                        "cafe.icon,"+
+                        "cafe.icon," +
                         "cafe.name," +
                         "cafe.city" +
                         " from points join cafe on points.cafe_id=cafe.id where user_id="+GeneralSync.id+";");

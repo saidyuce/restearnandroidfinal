@@ -95,13 +95,17 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                     "cafe.preminium_type," +
                     "campaing.detail," +
                     "cafe.name," +
+                    "cafe.large_image," +
+                    "cafe.icon," +
+                    "cafe.detail as cafe_detail," +
+                    "prize.name as prize_name," +
                     "cafe.x_,"+
                     "cafe.y_,"+
                     "campaing.category as campaing_category,"+
-                    "cafe.category as cafe_category " +
-                    "FROM " + "campaing JOIN cafe on campaing.cafe_id=cafe.id  "+q_loc + " ORDER BY distance ASC");
+                    "cafe.category as cafe_category" +
+                    " FROM (campaing JOIN cafe on campaing.cafe_id=cafe.id) JOIN prize on campaing.cafe_id=prize.cafe_id  "+q_loc + " ORDER BY distance ASC");
         }else if(i==1){
-            //for preminium
+            //for premium
             super.select_and_response_json("campaing", "SELECT  " +
                     "campaing.id AS cid," +
                     "cafe.id AS cfid," +
@@ -110,11 +114,15 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                     "cafe.preminium_type," +
                     "campaing.detail," +
                     "cafe.name," +
+                    "cafe.large_image," +
+                    "cafe.icon," +
+                    "cafe.detail as cafe_detail," +
+                    "prize.name as prize_name," +
                     "cafe.x_,"+
                     "cafe.y_,"+
                     "campaing.category as campaing_category,"+
                     "cafe.category as cafe_category " +
-                    "FROM " + "campaing JOIN cafe on campaing.cafe_id=cafe.id  "+q_loc + " ORDER BY distance ASC");
+                    " FROM (campaing JOIN cafe on campaing.cafe_id=cafe.id) JOIN prize on campaing.cafe_id=prize.cafe_id  "+q_loc + " ORDER BY distance ASC");
         }
 
     }
@@ -128,8 +136,6 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                 Log.v("MAIN DATA JSON", main_data.toString());
                 if (main_data.getJSONArray("campaing").length() > 0)
                     set_main_gui();
-                //   set_top_gui(); // top gui buraya ekledim. ayrı durumlarda güncellenmektense birlikte güncellensinler
-                //set top for preminium data
                 super.sync_finish(1);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -139,8 +145,7 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                 main_data = super.result_json;
                 if (main_data.getJSONArray("campaing").length() > 0)
                     Log.v("CAMPAING JSON", main_data.getJSONArray("campaing").toString());
-
-                    set_top_gui(); // top gui buraya ekledim. ayrı durumlarda güncellenmektense birlikte güncellensinler
+                    set_top_gui();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -156,7 +161,8 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         adj_items();
     }
 
-    private void set_top_gui(){  // bu metodu biraz kurcaladım
+    private void set_top_gui() {
+        ana_data = main_data;
         ImageAdapter adapter = new ImageAdapter(a.getBaseContext(),this);
         ViewGroup header = (ViewGroup) a.getLayoutInflater().inflate(R.layout.home_single_item_premium, ((HomeActivity) a).listView, false);
         ViewPager viewPager = (ViewPager) header.findViewById(R.id.view_pager);
@@ -166,7 +172,6 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         ((HomeActivity) a).listView.addHeaderView(header);
         HomeGridAdapter adapter_campaing = new HomeGridAdapter(a, this);
         ((HomeActivity) a).listView.setAdapter(adapter_campaing);
-        ana_data = main_data;
 
         //ViewPager   viewPager = (ViewPager)a. findViewById(R.id.view_pager);
         //CirclePageIndicator titleIndicator = (CirclePageIndicator)a.findViewById(R.id.titles);
@@ -178,6 +183,57 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         try {
             Double distance = main_data.getJSONArray("campaing").getJSONObject(json_indis).getDouble("distance");
             return distance.intValue() + " km";
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_detail(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("cafe_detail");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int get_premium_size() {
+        try {
+            int counter = 0;
+            for (int i = 0; i < ana_data.getJSONArray("campaing").length(); i++) {
+                if (ana_data.getJSONArray("campaing").getJSONObject(i).getInt("preminium_type") == 1) {
+                    ++counter;
+                }
+            }
+            return counter;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public String get_premium_image(int json_indis) {
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("large_image");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_icon(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("icon");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_large_image(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("large_image");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -251,6 +307,15 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         return null;
     }
 
+    public String get_prize(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("prize_name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String get_cafe_id(int json_indis) {
 
         try {
@@ -306,29 +371,34 @@ public class GetDataHomeScreen extends GetDataFromLocal {
 
     public void search(String key){
 
-        int id;
+        int id = 0;
         double cafe_x = 0.0;
         double cafe_y = 0.0;
         String name = "";
-        id=Integer.parseInt(search_items.get(key));
+        String cafe_detail = "";
+        String large_image = "";
         try {
             JSONArray campaingArray = ana_data.getJSONArray("campaing");
             for (int i = 0; i < campaingArray.length(); i++) {
-                if (campaingArray.getJSONObject(i).getInt("cid") == id) {
+                if (campaingArray.getJSONObject(i).getString("name").equalsIgnoreCase(key)) {
                     cafe_x = campaingArray.getJSONObject(i).getDouble("x_");
                     cafe_y = campaingArray.getJSONObject(i).getDouble("y_");
                     name = campaingArray.getJSONObject(i).getString("name");
+                    id = campaingArray.getJSONObject(i).getInt("cfid");
+                    cafe_detail = campaingArray.getJSONObject(i).getString("cafe_detail");
+                    large_image = campaingArray.getJSONObject(i).getString("large_image");
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("asfsaf", cafe_x + " " + cafe_y + " " + name + " " + id);
         Intent intent = new Intent(a, CafeActivity.class);
         intent.putExtra("cafe_x", cafe_x);
         intent.putExtra("cafe_y", cafe_y);
         intent.putExtra("name", name);
         intent.putExtra("cafe_id", id + "");
+        intent.putExtra("cafe_detail", cafe_detail);
+        intent.putExtra("large_image", large_image);
         a.startActivity(intent);
     }
 
@@ -409,23 +479,6 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         } catch (JSONException e){
             e.printStackTrace();
         }
-
-       /* ((MapActivity)a).mMap.clear();
-        if (pos == 0) {
-            indis = 0;
-            add_marker();
-        } else {
-            String choice = listItems[pos];
-            try {
-                for (int i = 0; i < main_data.getJSONArray("cafe").length(); i++) {
-                    if (choice.equalsIgnoreCase(get_category(i))) {
-                        add_marker_filter(i);
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
 

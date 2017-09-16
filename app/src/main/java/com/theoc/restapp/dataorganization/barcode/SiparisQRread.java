@@ -49,17 +49,13 @@ public class SiparisQRread extends ServConnection {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-send(jj_temp2);
-     /*    jj_temp.put("uid",user_id+"");;
+        send(jj_temp2);
+
+        /*    jj_temp.put("uid",user_id+"");;
                 jj_temp.put("key",key_cafe_siparis+"");
                 jj_temp.put("x_",x_loc+"");
                 jj_temp.put("y_",y_loc+"");
                 jj_temp.put("cid",cafe_id+"");*/
-
-
-
-
-
     }
 
 
@@ -115,13 +111,13 @@ send(jj_temp2);
                 syncData();
 
             }else {
-                ((MyPointsActivity)activity).OnQrError("error");
+                ((MyPointsActivity)activity).OnQrError("wrong");
             }
 
 
 
         } catch (JSONException e) {
-            ((MyPointsActivity)activity).OnQrError("error");
+            ((MyPointsActivity)activity).OnQrError("wrong");
         }
 
 
@@ -132,7 +128,7 @@ send(jj_temp2);
     @Override
     protected void onError(error e){
 
-
+        ((MyPointsActivity)activity).OnQrError("fail");
 
     }
 

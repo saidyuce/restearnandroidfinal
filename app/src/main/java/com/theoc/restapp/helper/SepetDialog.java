@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.vision.text.Text;
 import com.theoc.restapp.CafeJoinActivity;
 import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.LoginActivity;

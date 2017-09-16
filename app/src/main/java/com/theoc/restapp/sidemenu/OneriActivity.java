@@ -13,9 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.R;
@@ -25,6 +28,8 @@ import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
+
+import static com.theoc.restapp.R.id.radioGroup;
 
 public class OneriActivity extends AppCompatActivity {
     ListView navListView;
@@ -55,8 +60,32 @@ public class OneriActivity extends AppCompatActivity {
             }
         });
         ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
-        SegmentedGroup segmentedGroup = (SegmentedGroup) findViewById(R.id.segmented);
+        final SegmentedGroup segmentedGroup = (SegmentedGroup) findViewById(R.id.segmented);
         segmentedGroup.check(R.id.button21);
+        findViewById(R.id.oneriFab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (((EditText) findViewById(R.id.oneriEditText)).getText().toString().length() < 10) {
+                    Toast.makeText(OneriActivity.this, "Lutfen 10 karakterden uzun bir mesaj girin", Toast.LENGTH_SHORT).show();
+                } else {
+                    int checkedId = segmentedGroup.getCheckedRadioButtonId();
+                    View radioButton = segmentedGroup.findViewById(checkedId);
+                    int radioId = segmentedGroup.indexOfChild(radioButton);
+                    RadioButton btn = (RadioButton) segmentedGroup.getChildAt(radioId);
+                    String selection = (String) btn.getText();
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("message/rfc822");
+                    i.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@restearn.com"});
+                    i.putExtra(Intent.EXTRA_SUBJECT, selection);
+                    i.putExtra(Intent.EXTRA_TEXT, ((EditText) findViewById(R.id.oneriEditText)).getText().toString());
+                    try {
+                        startActivity(Intent.createChooser(i, "E-mail Gonder"));
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(OneriActivity.this, "E-mail gondermek icin uygun bir uygulama bulunamadi", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -68,7 +97,6 @@ public class OneriActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override

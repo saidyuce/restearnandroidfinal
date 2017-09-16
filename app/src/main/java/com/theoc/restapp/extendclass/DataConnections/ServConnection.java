@@ -43,7 +43,7 @@ public class ServConnection {
 
 
     public static int port_no=80;
-    public static String ip="restearndev.xyz";
+    public static String ip="restearnserver.com";
     public static String subdomain_file="RestUpp/KontrolPaneli/caferesim/";
     public static String get_file_url(){
         return "http://"+ip+"/"+subdomain_file;
@@ -84,7 +84,6 @@ public class ServConnection {
         String s;
 
         private error parameter_json(String name){
-
 
             try {
                 httpclient = new DefaultHttpClient();

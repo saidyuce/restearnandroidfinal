@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">RestApp</string>
     <string name="facebook_app_id">125034957904306</string>
-    <string name="googlemapsapi">AIzaSyDZEfI_umVc17dFEq_TVeo9ANI6PHOC2E4</string>
-    <string name="googleclientid">251234046154-efv7r4dc3prhveaj4m5rl6h84h970um9.apps.googleusercontent.com</string>
+    <string name="googlemapsapi">AIzaSyB3OQ3_3IEONgnVFIpd4fJtKC3mxlKCF4g</string>
+    <string name="googleclientid">677947695618-4lhs4u6j3npnq8b93mnc1dnd38iqgoph.apps.googleusercontent.com</string>
     <string name="googleserverid">AIzaSyCsaEhW2SmRRJ9Bh5EkTa07LrDn1r8QGx4</string>
 
 
@@ -10,11 +10,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 
-    <string name="title_activity_home">Ana Sayfa</string>
-    <string name="title_activity_map">Harita</string>
+    <string name="title_activity_home">Kampanyalar</string>
+    <string name="title_activity_map">Mekanlar</string>
     <string name="title_activity_my_points">Puanlarım</string>
     <string name="title_activity_my_points_detail">…</string>
-    <string name="title_activity_maps">Harita</string>
+    <string name="title_activity_maps">Mekanlar</string>
     <string name="title_activity_cafe_join">…</string>
     <string name="title_activity_menu">Menü</string>
 
@@ -36,4 +36,7 @@
     <string name="title_activity_hakkimizda">Hakkımızda</string>
     <string name="title_activity_oneri">Öneri ve Şikayet</string>
     <string name="title_activity_sss">Sıkça Sorulan Sorular</string>
+
+    <string name="sozlesme">Restearn <u>kullanıcı sözleşmesini</u> okudum ve onaylıyorum</string>
+    <string name="title_activity_ayarlar">AyarlarActivity</string>
 </resources>

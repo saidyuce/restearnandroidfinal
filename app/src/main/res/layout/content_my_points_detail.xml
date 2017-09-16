@@ -13,8 +13,8 @@
         android:id="@+id/mainRL"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_height="225dp"
-        android:layout_width="225dp">
+        android:layout_height="250dp"
+        android:layout_width="250dp">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -22,8 +22,8 @@
             android:max="360"
             android:progress="0"
             android:progressDrawable="@drawable/circularbig"
-            android:layout_width="225dp"
-            android:layout_height="225dp" />
+            android:layout_width="250dp"
+            android:layout_height="250dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,33 +58,12 @@
         android:layout_height="wrap_content"
         android:text="360&#xb0; ile kazanacağınız ödül"
         android:id="@+id/textView19"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#b71c1c"
         android:fontFamily="sans-serif-light"
         android:layout_below="@+id/mainRL"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="."
-        android:id="@+id/textView20"
-        android:textSize="40sp"
-        android:textColor="#b71c1c"
-        android:fontFamily="sans-serif-light"
-        android:layout_alignTop="@+id/textView19"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"/>
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView2"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView19"
-        />
 
     <RelativeLayout
         android:layout_width="90dp"
@@ -104,17 +83,42 @@
             android:layout_alignParentRight="true"/>
 
         <TextView
-            android:text="0"
+            android:id="@+id/odulTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif"
-            android:layout_toLeftOf="@id/giftImageView"
-            android:textColor="#b71c1c"
+            android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:layout_centerVertical="true"/>
+            android:layout_toLeftOf="@id/giftImageView"
+            android:fontFamily="sans-serif"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="18sp" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/prizeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView19"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/prizeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignEnd="@+id/mainRL"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/mainRL"
+        android:layout_marginBottom="24dp"
+        android:background="#01bbd4"
+        android:text="ÖDÜL KULLAN"
+        android:textColor="#ffffff"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

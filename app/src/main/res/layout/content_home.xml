@@ -9,10 +9,17 @@
 
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ListView
+    <com.theoc.restapp.helper.HeaderGridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listView"
+        android:scrollbars="none"
+        android:horizontalSpacing="0dp"
+        android:verticalSpacing="4dp"
+        android:numColumns="2"
+        android:columnWidth="175dp"
+        android:stretchMode="columnWidth"
+        android:gravity="left"
         android:layout_gravity="center_horizontal"
         android:divider="@null"
         android:dividerHeight="0dp"
@@ -55,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ana Sayfa"
+                android:text="Kampanyalar"
                 android:id="@+id/textView6"
                 android:textColor="#ffffff"
                 android:fontFamily="sans-serif-light"
@@ -66,14 +73,14 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:id="@+id/midiconImageView"
             android:src="@drawable/midicon"
             android:layout_gravity="bottom"
             android:layout_weight="10"
             android:layout_marginLeft="2dp"
-            android:layout_marginBottom="1dp"/>
+            android:layout_marginBottom="2dp"/>
 
         <LinearLayout
             android:orientation="horizontal"

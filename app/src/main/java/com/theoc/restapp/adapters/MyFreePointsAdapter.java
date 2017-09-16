@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,9 +75,10 @@ public class MyFreePointsAdapter extends BaseAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        point = Integer.parseInt((int) Double.parseDouble(data.get_point(position)) % 360 + "");
-        counter = Integer.parseInt((int) Double.parseDouble(data.get_point(position)) / 360 + "");
-
+        point = ((360 / data.get_cafecoin(position)) * Integer.parseInt(data.get_point(position))) % 360;
+        counter = Integer.parseInt(data.get_point(position)) / data.get_cafecoin(position);
+        Log.d("POINT=", data.get_point(position));
+        Log.d("COIN=", data.get_cafecoin(position)+"");
         holder.kafeadıTextView.setText(data.get_cafename(position));
         holder.kafelokasyonTextView.setText(data.get_city(position));
         holder.dereceTextView.setText((int) point + "");
@@ -96,10 +98,12 @@ public class MyFreePointsAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, MyPointsDetailActivity.class);
                 intent.putExtra("cafe_id", data.get_cafeid(position));
                 intent.putExtra("point", data.get_point(position));
+                intent.putExtra("coin", data.get_cafecoin(position));
                 intent.putExtra("cafe_name", data.get_cafename(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
-                activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
             }
         });
         final ObjectAnimator animation = ObjectAnimator.ofInt (holder.progressBar, "progress", 0, Integer.parseInt((int) point + "")); // desired degree

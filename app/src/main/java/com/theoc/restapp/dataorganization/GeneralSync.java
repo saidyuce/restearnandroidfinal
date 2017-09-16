@@ -16,6 +16,7 @@ import com.theoc.restapp.extendclass.DataProcess.GetDataFromLocal;
 import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.helper.FusedLocationReceiver;
 import com.theoc.restapp.helper.GoogleLocationClass;
+import com.theoc.restapp.sidemenu.AyarlarActivity;
 import com.theoc.restapp.sidemenu.HakkimizdaActivity;
 import com.theoc.restapp.sidemenu.OneriActivity;
 import com.theoc.restapp.sidemenu.SSSActivity;
@@ -185,6 +186,9 @@ public class GeneralSync extends GetDataFromLocal {
                 break;
             case OneriScreen:
                 currentactivity = new OneriActivity();
+                break;
+            case AyarlarScreen:
+                currentactivity = new AyarlarActivity();
                 break;
             default:
                 break;

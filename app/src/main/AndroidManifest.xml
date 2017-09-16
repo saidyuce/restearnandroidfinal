@@ -111,6 +111,11 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".helper.SozlesmeActivity" />
+        <activity
+            android:name=".sidemenu.AyarlarActivity"
+            android:label="@string/title_activity_ayarlar"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

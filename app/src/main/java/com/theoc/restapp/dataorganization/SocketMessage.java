@@ -3,15 +3,14 @@ package com.theoc.restapp.dataorganization;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class SocketMessage {
 
@@ -82,8 +81,22 @@ public class SocketMessage {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    public void email_user(JSONObject json) {
+        if (mSocket == null) {
+            try {
+                Log.v("SOCKET CONNECT=", "DONE");
+                mSocket = IO.socket("http://130.211.92.93:65080");
+                mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
+                mSocket.connect();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
 
+        mSocket.emit("email_user", json.toString());
+        Log.v("SOCKET=", json.toString());
     }
 
     public void push_token_gonder(String user_id, String push_token) {
@@ -93,7 +106,8 @@ public class SocketMessage {
             sending.put("push_token", push_token);
 
             if (mSocket == null) {
-                mSocket = IO.socket("http://restearnserver.com:65080");
+                mSocket = IO.socket("http://130.211.92.93:65080");
+                mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
                 mSocket.connect();
             }
 
@@ -105,8 +119,24 @@ public class SocketMessage {
         }
     }
 
+    private Emitter.Listener onConnectError = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
 
-    private Emitter.Listener siparis_geri_Bildirim = new Emitter.Listener() {
+            a.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mSocket != null)
+                        if (!mSocket.connected())
+                            Log.v("SOCKET STATUS=", "NOT CONNECTED");
+                    mSocket.connect();
+
+                }
+            });
+        }
+    };
+
+    private io.socket.emitter.Emitter.Listener siparis_geri_Bildirim = new Emitter.Listener() {
 
         @Override
         public void call(final Object... args) {
@@ -136,7 +166,7 @@ public class SocketMessage {
 
     };
 
-    private Emitter.Listener oturum_geri_Bildirim = new Emitter.Listener() {
+    private io.socket.emitter.Emitter.Listener oturum_geri_Bildirim = new Emitter.Listener() {
 
         @Override
         public void call(final Object... args) {

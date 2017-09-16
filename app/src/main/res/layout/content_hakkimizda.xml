@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="72dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".sidemenu.HakkimizdaActivity"
     tools:showIn="@layout/activity_hakkimizda">
@@ -34,8 +34,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="20"
-                android:src="@drawable/logo"
+                android:layout_weight="17"
+                android:src="@drawable/siyahlogo"
                 android:scaleType="centerInside"/>
 
             <RelativeLayout
@@ -51,7 +51,7 @@
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="#000000"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:fontFamily="sans-serif-light"
                     android:id="@+id/textView"
                     android:layout_above="@+id/moreTextView"
@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textAlignment="center"
                     android:fontFamily="sans-serif-light"
                     android:autoLink="web"
@@ -79,7 +79,7 @@
                 android:layout_gravity="bottom|center_horizontal"
                 android:gravity="center"
                 android:weightSum="100"
-                android:layout_weight="10">
+                android:layout_weight="13">
 
                 <ImageButton
                     android:layout_width="0dp"

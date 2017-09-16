@@ -98,7 +98,7 @@ public class MyPointsAdapter extends BaseAdapter {
                 intent.putExtra("cafe_name", data.get_cafename(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
-                activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         final ObjectAnimator animation = ObjectAnimator.ofInt (holder.progressBar, "progress", 0, Integer.parseInt((int) point + "")); // desired degree

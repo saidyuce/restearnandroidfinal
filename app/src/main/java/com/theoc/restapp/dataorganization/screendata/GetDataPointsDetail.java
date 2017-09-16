@@ -3,7 +3,6 @@ package com.theoc.restapp.dataorganization.screendata;
 import android.app.Activity;
 
 import com.theoc.restapp.MyPointsDetailActivity;
-import com.theoc.restapp.adapters.MyPointsDetailAdapter;
 import com.theoc.restapp.extendclass.DataProcess.GetDataFromLocal;
 
 import org.json.JSONException;
@@ -51,9 +50,7 @@ public class GetDataPointsDetail extends GetDataFromLocal {
     String[] prizes;
 
     private void set_prizes() {
-        MyPointsDetailAdapter adapter = new MyPointsDetailAdapter(a.getBaseContext(), this);
-        ((MyPointsDetailActivity) a).listView.setAdapter(adapter);
-
+        ((MyPointsDetailActivity) a).prizeTextView.setText(get_prizes(0));
     }
 
     public String get_prizes(int pos) {

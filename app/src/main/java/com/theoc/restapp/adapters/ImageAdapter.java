@@ -21,13 +21,13 @@ public class ImageAdapter extends PagerAdapter {
     GetDataHomeScreen data;
 
     public ImageAdapter(Context context, GetDataHomeScreen data) {
-        this. data = data;
+        this.data = data;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return data.get_size();
+        return data.get_premium_size();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ImageAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView = new ImageView(context);
         Glide.with(context)
-                .load(data.get_campaing_picture_url(position))
+                .load("http://restearndev.xyz/RestUpp/KontrolPaneli/caferesim/" + data.get_premium_image(position))
                 .error(R.drawable.mypointsnargile)
                 .placeholder(R.drawable.placeholder)
                 .centerCrop()

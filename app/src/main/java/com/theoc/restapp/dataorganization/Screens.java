@@ -11,5 +11,6 @@ public enum Screens {
     CafeJoinScreen,
     SSSScreen,
     HakkimizdaScreen,
-    OneriScreen
+    OneriScreen,
+    AyarlarScreen
 }

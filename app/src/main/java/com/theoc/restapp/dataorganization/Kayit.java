@@ -36,9 +36,10 @@ public void kayit_ol(String username,String password,String device_id,String isi
     protected void onfinish(){
 
         String state="";
-
+        String key="";
         try {
             state=response_json.getString("state");
+            key=response_json.getString("key");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -46,16 +47,16 @@ public void kayit_ol(String username,String password,String device_id,String isi
         switch (state) {
             case "yok":
 
-                register.kayit_bitti(KayitType.yok);
+                register.kayit_bitti(KayitType.yok, key);
                 break;
             case "var":
-                register.kayit_bitti(KayitType.var);
+                register.kayit_bitti(KayitType.var, key);
                 break;
             case "fail":
-                register.kayit_bitti(KayitType.fail);
+                register.kayit_bitti(KayitType.fail, key);
                 break;
             default:
-                register.kayit_bitti(KayitType.serversorunu);
+                register.kayit_bitti(KayitType.serversorunu, key);
                 break;
         }
 

@@ -74,19 +74,13 @@ public class GetDataMap extends GetDataFromLocal {
     public GetDataMap( Activity activity) {
         super(activity.getBaseContext(), activity);
     }
-    public JSONObject main_data;
-    private String[] listItems = {"Hepsini Göster",
-            "Tatlı",
-            "Çay Bahçesi",
-            "Kahve",
-            "Kebap",
+    private JSONObject main_data;
+    private String[] listItems = {"Tümünü Göster",
+            "Kafe",
             "Fast Food",
-            "Çorba",
-            "Restorant",
+            "Restaurant",
             "Pub & Bar",
-            "Gece Kulübü",
-            "Lounge",
-            "Kafe"};
+            "Gece Kulübü"};
 
     public void start_paralel() {
 
@@ -118,7 +112,6 @@ public class GetDataMap extends GetDataFromLocal {
                     main_data =(JSONObject) cloneObject(super.result_json);
                 }
                 if (main_data != null && main_data.getJSONArray("cafe").length() > 0) {
-                    writeToFile(main_data.toString(), a.getApplicationContext());
                     search_locations = new HashMap<>();
                     suggestion_name = new String[main_data.getJSONArray("cafe").length()];
                     set_gui();
@@ -223,8 +216,7 @@ public class GetDataMap extends GetDataFromLocal {
     public String get_id(int json_indis) {
 
         try {
-            JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-            return json.getJSONArray("cafe").getJSONObject(json_indis).getInt("id") + "";
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getInt("id") + "";
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -243,8 +235,7 @@ public class GetDataMap extends GetDataFromLocal {
     public String get_name(int json_indis) {
 
         try {
-            JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-            return json.getJSONArray("cafe").getJSONObject(json_indis).getString("name");
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -253,8 +244,7 @@ public class GetDataMap extends GetDataFromLocal {
     public Double get_x(int json_indis) {
 
         try {
-            JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-            return json.getJSONArray("cafe").getJSONObject(json_indis).getDouble("x_");
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getDouble("x_");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -263,8 +253,7 @@ public class GetDataMap extends GetDataFromLocal {
     public Double get_y(int json_indis) {
 
         try {
-            JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-            return json.getJSONArray("cafe").getJSONObject(json_indis).getDouble("y_");
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getDouble("y_");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -273,8 +262,7 @@ public class GetDataMap extends GetDataFromLocal {
     public String get_icon(int json_indis) {
 
         try {
-            JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-            return json.getJSONArray("cafe").getJSONObject(json_indis).getString("map_icon");
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("map_icon");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -283,8 +271,7 @@ public class GetDataMap extends GetDataFromLocal {
     public String get_category(int json_indis) {
 
         try {
-            JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-            return json.getJSONArray("cafe").getJSONObject(json_indis).getString("category");
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("category");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -325,8 +312,7 @@ public class GetDataMap extends GetDataFromLocal {
     public void populate(String text){
         matrixCursor = new MatrixCursor(new String[]{ BaseColumns._ID, "cafe_name" });
         try {
-            JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-            for (int i=0; i<json.getJSONArray("cafe").length(); i++) {
+            for (int i=0; i<main_data.getJSONArray("cafe").length(); i++) {
                 if (suggestion_name[i].toLowerCase().startsWith(text.toLowerCase())&&(get_category(i).equalsIgnoreCase(choice)||choice.equalsIgnoreCase(listItems[0])))
                     matrixCursor.addRow(new Object[] {i, suggestion_name[i]});
             }
@@ -375,9 +361,7 @@ public class GetDataMap extends GetDataFromLocal {
         } else {
             choice = listItems[pos];
             try {
-                Log.v("READ FROM FILE", readFromFile(a.getApplicationContext()));
-                JSONObject json = new JSONObject(readFromFile(a.getApplicationContext()));
-                for (int i = 0; i < json.getJSONArray("cafe").length(); i++) {
+                for (int i = 0; i < main_data.getJSONArray("cafe").length(); i++) {
                     if (choice.equalsIgnoreCase(get_category(i))) {
                         add_marker_filter(i);
 

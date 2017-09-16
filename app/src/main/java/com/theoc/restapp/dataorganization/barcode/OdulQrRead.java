@@ -110,13 +110,13 @@ public class OdulQrRead extends ServConnection {
                 syncData();
 
             }else {
-                ((MyPointsActivity)activity).OnQrError("error");
+                ((MyPointsActivity)activity).OnQrError("wrong");
             }
 
 
 
         } catch (JSONException e) {
-         //   ((MyPointsActivity)activity).OnOdulQrError("error");
+            ((MyPointsActivity)activity).OnQrError("wrong");
         }
 
 
@@ -126,7 +126,7 @@ public class OdulQrRead extends ServConnection {
     }
     @Override
     protected void onError(error e){
-
+        ((MyPointsActivity)activity).OnQrError("fail");
 
 
     }
@@ -140,7 +140,7 @@ public class OdulQrRead extends ServConnection {
     }
 
   public   void onsyncfinish(){
-      //((MyPointsActivity)activity).OnOdulQrSuccess(get_siparisqr_yanıt().toString());
+      ((MyPointsActivity)activity).OnOdulQrSuccess(get_siparisqr_yanıt().toString());
 
     }
 

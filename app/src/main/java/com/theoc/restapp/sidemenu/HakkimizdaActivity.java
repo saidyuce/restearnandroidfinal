@@ -1,6 +1,10 @@
 package com.theoc.restapp.sidemenu;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -46,11 +50,48 @@ public class HakkimizdaActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HakkimizdaActivity.this, HomeActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 
         ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
+
+        findViewById(R.id.fbImageButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getFacebookPageURL(HakkimizdaActivity.this)));
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.instaImageButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent instagramIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.instagram.com/_u/restearnapp"));
+                instagramIntent.setPackage("com.instagram.android");
+
+                try {
+                    startActivity(instagramIntent);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/restearnapp")));
+                }
+            }
+        });
+        findViewById(R.id.twitterImageButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = null;
+                try {
+                    // get the Twitter app if possible
+                    HakkimizdaActivity.this.getPackageManager().getPackageInfo("com.twitter.android", 0);
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=873274593238274052"));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                } catch (Exception e) {
+                    // no Twitter app, revert to browser
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/restearn"));
+                }
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -62,7 +103,6 @@ public class HakkimizdaActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
@@ -72,6 +112,20 @@ public class HakkimizdaActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=https://www.facebook.com/restearn";
+            } else { //older versions of fb app
+                return "fb://page/restearn";
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return "https://www.facebook.com/restearn"; //normal web url
         }
     }
 }

@@ -24,12 +24,15 @@ public class Giris extends ServConnection {
         loginActivity=l;
     }
 
-    public void normal_giriş(String u,String pas){
+    public void normal_giriş(String u,String pas, String tip){
         jj_temp =new JSONObject();
 
         try {
             jj_temp.put("user_name",u);
             jj_temp.put("password",pas);
+            jj_temp.put("name", "");
+            jj_temp.put("surname", "");
+            jj_temp.put("tip", tip);
             send_normal(jj_temp);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -94,10 +97,12 @@ public class Giris extends ServConnection {
 
 private void  giriş_result(JSONObject t){
     String state="";
+    String returntip="";
     String temp_key="";
     int id=-1;
     try {
         state=t.getString("state");
+        returntip=t.getString("returntip");
     } catch (JSONException e) {
         e.printStackTrace();
     }
@@ -115,7 +120,17 @@ private void  giriş_result(JSONObject t){
             }
             break;
         case "wait":
-            loginActivity.gir(GirisType.onaybekleniyor, "", id);
+            if (returntip.equals("true")) {
+                try {
+                    temp_key = t.getString("key");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    loginActivity.gir(GirisType.girisserversorunu, "", id);
+                }
+                loginActivity.gir(GirisType.onaybekleniyor, temp_key, id);
+            } else {
+                loginActivity.gir(GirisType.onaybekleniyor, "", id);
+            }
             break;
         case "fail":
             loginActivity.gir(GirisType.girisbasarisiz, "", id);
@@ -198,7 +213,7 @@ private void  giriş_result(JSONObject t){
     }
 
     private void send_normal(JSONObject j){
-       g=giris_type.normal;
+        g=giris_type.normal;
         super.adj_parameters_json_normal_mode(j);
         super.onStart(input_type.JSON_IMPUT,output_type.JSONOUT,"giris.php");
     }

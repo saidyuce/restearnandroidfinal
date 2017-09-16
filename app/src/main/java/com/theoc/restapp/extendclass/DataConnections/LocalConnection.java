@@ -231,7 +231,7 @@ public class LocalConnection extends SQLiteOpenHelper{
 
 
     protected void control_tables(Map<String,String> a){
-        // removeAll();
+        //removeAll();
         for (String b:a.keySet() ){
             control(b,a.get(b));
             when_the_control(b);

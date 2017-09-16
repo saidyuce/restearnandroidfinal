@@ -8,16 +8,15 @@ package com.theoc.restapp.dataorganization.barcode;
  */
 import android.app.Activity;
 import android.widget.Toast;
-
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
-import com.github.nkzawa.emitter.Emitter;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+
 public class ConnectionPc {
 
     Socket mSocket;
@@ -26,7 +25,7 @@ Activity activity;
          activity=a;
 
              try {
-                 mSocket = IO.socket("http://104.197.217.126:65080");
+                 mSocket = IO.socket("http://130.211.92.93:65080");
              } catch (URISyntaxException e) {}
 
 
@@ -48,7 +47,7 @@ Activity activity;
 
 
 
-    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+    private io.socket.emitter.Emitter.Listener onNewMessage = new Emitter.Listener() {
 
         @Override
         public void call(final Object... args) {

@@ -41,12 +41,13 @@ public class GetDataFreePoint extends GetDataFromLocal implements View.OnClickLi
         super.select_and_response_json("free_point",
                 "select free_point.id," +
                         "kul_id," +
-                        "cafe_id," +
+                        "free_point.cafe_id," +
                         "point," +
                         "cafe.icon," +
                         "cafe.name," +
-                        "cafe.city" +
-                        " from free_point join cafe on free_point.cafe_id=cafe.id where kul_id=" + GeneralSync.id + ";");
+                        "cafe.city," +
+                        "cafecoin.coin" +
+                        " from (free_point join cafe on free_point.cafe_id=cafe.id) join cafecoin on cafe.id=cafecoin.cafe_id where kul_id=" + GeneralSync.id + ";");
     }
 
 
@@ -100,6 +101,15 @@ public class GetDataFreePoint extends GetDataFromLocal implements View.OnClickLi
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int get_cafecoin(int json_indis) {
+        try {
+            return main_data.getJSONArray("free_point").getJSONObject(json_indis).getInt("coin");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public String get_cafeid(int json_indis) {

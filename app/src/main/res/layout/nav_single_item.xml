@@ -12,27 +12,21 @@
         android:layout_height="24dp"
         android:id="@+id/navImageView"
         android:src="@drawable/navmekanim"
-        android:layout_weight="20"
         android:layout_gravity="center"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="false"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/navTextView"
         android:textColor="#fff"
-        android:textSize="17sp"
-        android:layout_weight="80"
+        android:textSize="15sp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="false"
         android:layout_toRightOf="@+id/navImageView"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="48dp"
+        android:layout_marginLeft="24dp"
         android:fontFamily="sans-serif-light"/>
 </RelativeLayout>
