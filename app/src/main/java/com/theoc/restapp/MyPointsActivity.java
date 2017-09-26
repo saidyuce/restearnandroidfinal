@@ -1,15 +1,11 @@
 package com.theoc.restapp;
 
-import android.animation.ObjectAnimator;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,25 +13,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.barcode.OdulQrRead;
 import com.theoc.restapp.dataorganization.barcode.SiparisQRread;
 import com.theoc.restapp.dataorganization.screendata.GetDataFreePoint;
-import com.theoc.restapp.dataorganization.screendata.GetDataPoints;
+import com.theoc.restapp.helper.GoogleAPIClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,9 +67,32 @@ public class MyPointsActivity extends AppCompatActivity
         midiconImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPointsActivity.this, QRActivity.class);
+                if (GeneralSync.id != -1) {
+                    Intent intent = new Intent(MyPointsActivity.this, QRActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else {
+                    Toast.makeText(MyPointsActivity.this, "Bu özellikten faydalanmak için hesap oluşturup giriş yapın", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        findViewById(R.id.navCikisButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new GoogleAPIClient().signOutClient();
+                LoginManager.getInstance().logOut();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("id", 0);
+                editor.putString("temp_key", "");
+                GeneralSync.id = 0;
+                GeneralSync.temp_key = "";
+                editor.apply();
+                Intent intent = new Intent(MyPointsActivity.this, LoginActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
             }
         });
 

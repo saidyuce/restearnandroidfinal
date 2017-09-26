@@ -1,8 +1,14 @@
 package com.theoc.restapp.dataorganization;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.theoc.restapp.AnketActivity;
 import com.theoc.restapp.CafeActivity;
@@ -54,12 +60,10 @@ public class GeneralSync extends GetDataFromLocal {
 
         on_general_sync = true;
         synced = false;
-        getUserLocation();
         //bura gelmeden önce city mutlaka belli olmalı
+        getUserLocation();
         super.get_data_async_single(true, context_, "genel_senkronizasyon.php", "synctable", "(id INT PRIMARY KEY NOT NULL ,id2 INT,name TEXT,type TEXT,id3 INT);", get_extra_data(), 0);
-
     }
-
 
     public Map<String, String> get_extra_data() {
         Map<String, String> ext = new HashMap<>();
@@ -122,9 +126,16 @@ public class GeneralSync extends GetDataFromLocal {
             @Override
             public void onLocationChanged() {
                 Location location = googleLocationClass.getLocation();
-                x_loc = location.getLatitude();
-                y_loc = location.getLongitude();
-
+                if (location.getLatitude() == 0.0 && location.getLongitude() == 0.0) {
+                    location = googleLocationClass.getLastLocation();
+                    Log.d("LAST LOCATION=", location.getLatitude() + "," + location.getLongitude());
+                    x_loc = location.getLatitude();
+                    y_loc = location.getLongitude();
+                } else {
+                    Log.d("LOCATION=", location.getLatitude() + "," + location.getLongitude());
+                    x_loc = location.getLatitude();
+                    y_loc = location.getLongitude();
+                }
             }
         });
     }

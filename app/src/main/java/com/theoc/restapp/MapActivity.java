@@ -262,6 +262,11 @@ public class MapActivity extends AppCompatActivity
         intent.putExtra("cafe_x", getDataMap.get_x(Integer.parseInt(marker.getSnippet())));
         intent.putExtra("cafe_y", getDataMap.get_y(Integer.parseInt(marker.getSnippet())));
         intent.putExtra("cafe_id", getDataMap.get_id(Integer.parseInt(marker.getSnippet())));
+        intent.putExtra("face", getDataMap.get_face(Integer.parseInt(marker.getSnippet())));
+        intent.putExtra("twitter", getDataMap.get_twitter(Integer.parseInt(marker.getSnippet())));
+        intent.putExtra("instagram", getDataMap.get_instagram(Integer.parseInt(marker.getSnippet())));
+        intent.putExtra("web", getDataMap.get_site(Integer.parseInt(marker.getSnippet())));
+        intent.putExtra("tel", getDataMap.get_tel(Integer.parseInt(marker.getSnippet())));
         startActivity(intent);
     }
 }

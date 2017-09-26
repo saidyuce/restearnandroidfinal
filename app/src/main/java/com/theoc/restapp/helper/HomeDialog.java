@@ -24,17 +24,23 @@ public class HomeDialog extends Dialog {
     String type;
     String detail;
     String cafe_id;
-    Context context;
+    Activity activity;
     String logo;
     String name;
     double cafe_x;
     double cafe_y;
     String cafe_detail;
     String large_image;
+    String face;
+    String twitter;
+    String instagram;
+    String web;
+    String tel;
 
-    public HomeDialog(Context context, String type, String detail, String cafe_id, String logo, String name, double cafe_x, double cafe_y, String cafe_detail, String large_image) {
-        super(context);
-        this.context = context;
+    public HomeDialog(Activity activity, String type, String detail, String cafe_id, String logo, String name, double cafe_x, double cafe_y,
+                      String cafe_detail, String large_image, String face, String twitter, String instagram, String web, String tel) {
+        super(activity);
+        this.activity = activity;
         this.type = type;
         this.detail = detail;
         this.cafe_id = cafe_id;
@@ -44,6 +50,11 @@ public class HomeDialog extends Dialog {
         this.name = name;
         this.cafe_detail = cafe_detail;
         this.large_image = large_image;
+        this.face = face;
+        this.twitter = twitter;
+        this.instagram = instagram;
+        this.web = web;
+        this.tel = tel;
     }
 
     @Override
@@ -69,8 +80,8 @@ public class HomeDialog extends Dialog {
             kampanyaTypeTextView.setText(type);
         }
         kampanyaDetailTextView.setText(detail);
-        Glide.with(context)
-                .load("http://restearndev.xyz/RestUpp/KontrolPaneli/caferesim/" + logo)
+        Glide.with(activity)
+                .load(logo)
                 .error(R.drawable.mypointsnargile)
                 .placeholder(R.drawable.placeholder)
                 .dontAnimate()
@@ -80,14 +91,18 @@ public class HomeDialog extends Dialog {
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity activity = (Activity) context;
-                Intent intent = new Intent(context, CafeActivity.class);
+                Intent intent = new Intent(activity, CafeActivity.class);
                 intent.putExtra("cafe_id", cafe_id);
                 intent.putExtra("cafe_x", cafe_x);
                 intent.putExtra("cafe_y", cafe_y);
                 intent.putExtra("name", name);
                 intent.putExtra("cafe_detail", cafe_detail);
                 intent.putExtra("large_image", large_image);
+                intent.putExtra("face", face);
+                intent.putExtra("twitter", twitter);
+                intent.putExtra("instagram", instagram);
+                intent.putExtra("web", web);
+                intent.putExtra("tel", tel);
                 activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 activity.startActivity(intent);
                 HomeDialog.this.dismiss();

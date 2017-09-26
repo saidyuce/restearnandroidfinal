@@ -140,7 +140,7 @@ public class GetDataPoints extends GetDataFromLocal implements View.OnClickListe
     public String get_cafe_picture_url (int json_indis) {
 
         try {
-            return ServConnection.get_file_url()+ main_data.getJSONArray("points").getJSONObject(json_indis).getString("icon");
+            return ServConnection.get_file_url() + main_data.getJSONArray("points").getJSONObject(json_indis).getString("icon");
         } catch (JSONException e) {
             e.printStackTrace();
         }

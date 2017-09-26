@@ -1,24 +1,20 @@
 package com.theoc.restapp;
 
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -38,18 +34,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.MapView;
 import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.dataorganization.Giris;
 import com.theoc.restapp.dataorganization.GirisType;
 import com.theoc.restapp.dataorganization.KayitType;
 import com.theoc.restapp.dataorganization.SifreUnuttum;
 import com.theoc.restapp.dataorganization.SocketMessage;
+import com.theoc.restapp.helper.VersionChecker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         socket_message = new SocketMessage(this);
+        giris = new Giris(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.googleclientid))
@@ -93,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.forgotButton).setOnClickListener(this);
         fbLoginButton = (LoginButton) findViewById(R.id.fbLoginButton);
         fbLoginButton.setOnClickListener(this);
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -105,13 +103,82 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 }
             }
-        }).start();
-
-        giris = new Giris(this);
-        giris.onceki_giris();
+        }).start();*/
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        VersionChecker versionChecker = new VersionChecker();
+        try {
+            String latestVersion = versionChecker.execute().get();
+            if (latestVersion != null) {
+                Log.w("LATEST VERSION=", latestVersion);
+                Log.w("CURRENT VERSION=", BuildConfig.VERSION_NAME);
+                if (compareVersionNames(BuildConfig.VERSION_NAME, latestVersion) == -1) {
+                    prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    float lastTime = prefs.getFloat("lastUpdateCheck", 0);
+                    if (lastTime != 0) {
+                        if (System.currentTimeMillis() - lastTime >= 7200000) {
+                            new AlertDialog.Builder(this)
+                                    .setMessage("Henüz Beta sürecinde olduğumuz için tüm Restearn güncellemelerini zorunlu tutuyoruz. Lütfen uygulamanızı " + latestVersion + " sürümüne güncelleyin")
+                                    .setPositiveButton("Güncelle", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Uri uri = Uri.parse("market://details?id=" + LoginActivity.this.getBaseContext().getPackageName());
+                                            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                            } else {
+                                                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                            }
+                                            try {
+                                                startActivity(goToMarket);
+                                            } catch (ActivityNotFoundException e) {
+                                                startActivity(new Intent(Intent.ACTION_VIEW,
+                                                        Uri.parse("http://play.google.com/store/apps/details?id=" + LoginActivity.this.getBaseContext().getPackageName())));
+                                            }
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    .show();
+                        } else {
+                            //Log.w("Last Update Check=", lastTime+"");
+                            //Log.w("Time In Between", System.currentTimeMillis() - lastTime + "");
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putFloat("lastUpdateCheck", 0);
+                            //Log.w("Last Update Check=", "ADDED");
+                            editor.apply();
+
+                            /*giris = new Giris(this);
+                            giris.onceki_giris();*/
+                        }
+
+                    } else {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putFloat("lastUpdateCheck", System.currentTimeMillis());
+                        //Log.w("Last Update Check=", "ADDED");
+                        editor.apply();
+                    }
+
+                } else {
+                    /*giris = new Giris(this);
+                            giris.onceki_giris();*/
+                }
+            } else {
+                /*giris = new Giris(this);
+                            giris.onceki_giris();*/
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            /*giris = new Giris(this);
+                            giris.onceki_giris();*/
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -436,6 +503,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    public int compareVersionNames(String oldVersionName, String newVersionName) {
+        int res = 0;
+
+        String[] oldNumbers = oldVersionName.split("\\.");
+        String[] newNumbers = newVersionName.split("\\.");
+
+        // To avoid IndexOutOfBounds
+        int maxIndex = Math.min(oldNumbers.length, newNumbers.length);
+
+        for (int i = 0; i < maxIndex; i ++) {
+            int oldVersionPart = Integer.valueOf(oldNumbers[i]);
+            int newVersionPart = Integer.valueOf(newNumbers[i]);
+
+            if (oldVersionPart < newVersionPart) {
+                res = -1;
+                break;
+            } else if (oldVersionPart > newVersionPart) {
+                res = 1;
+                break;
+            }
+        }
+
+        // If versions are the same so far, but they have different length...
+        if (res == 0 && oldNumbers.length != newNumbers.length) {
+            res = (oldNumbers.length > newNumbers.length)?1:-1;
+        }
+
+        return res;
     }
 
 }

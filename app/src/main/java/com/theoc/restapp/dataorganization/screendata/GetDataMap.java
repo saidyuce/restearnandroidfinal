@@ -99,6 +99,11 @@ public class GetDataMap extends GetDataFromLocal {
                         "category,"+
                         "map_icon," +
                         "name," +
+                        "face," +
+                        "twitter," +
+                        "instagram," +
+                        "tel," +
+                        "site," +
                         "x_," +
                         "y_" +
                         " from cafe;");
@@ -211,7 +216,50 @@ public class GetDataMap extends GetDataFromLocal {
     }
 
 
+    public String get_face(int json_indis) {
+        try {
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("face");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public String get_twitter(int json_indis) {
+        try {
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("twitter");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_instagram(int json_indis) {
+        try {
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("instagram");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_site(int json_indis) {
+        try {
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("site");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_tel(int json_indis) {
+        try {
+            return main_data.getJSONArray("cafe").getJSONObject(json_indis).getString("tel");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public String get_id(int json_indis) {
 

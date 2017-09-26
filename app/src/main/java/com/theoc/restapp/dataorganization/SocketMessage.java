@@ -3,6 +3,8 @@ package com.theoc.restapp.dataorganization;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,14 +29,16 @@ public class SocketMessage {
     public  void  oturum_Ac(String cafe_durum,String cafe_id,String user_id){
 
         JSONObject sending=new JSONObject();
+
         try {
             sending.put("type","onur1234");
             sending.put("cafe_durum",cafe_durum);
             sending.put("cafe_id",cafe_id);
             sending.put("user_id",user_id);
 
+
             try {
-                mSocket = IO.socket("http://restearnserver.com:65080");
+                mSocket = IO.socket("http://35.187.119.90:65080");
             } catch (URISyntaxException e) {}
 
 
@@ -63,7 +67,7 @@ public class SocketMessage {
 
             if (mSocket==null){
                 try {
-                    mSocket = IO.socket("http://restearnserver.com:65080");
+                    mSocket = IO.socket("http://35.187.119.90:65080");
                     mSocket.connect();
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
@@ -87,7 +91,7 @@ public class SocketMessage {
         if (mSocket == null) {
             try {
                 Log.v("SOCKET CONNECT=", "DONE");
-                mSocket = IO.socket("http://130.211.92.93:65080");
+                mSocket = IO.socket("http://35.187.119.90:65080");
                 mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
                 mSocket.connect();
             } catch (URISyntaxException e) {
@@ -106,7 +110,7 @@ public class SocketMessage {
             sending.put("push_token", push_token);
 
             if (mSocket == null) {
-                mSocket = IO.socket("http://130.211.92.93:65080");
+                mSocket = IO.socket("http://35.187.119.90:65080");
                 mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
                 mSocket.connect();
             }

@@ -1,17 +1,24 @@
 package com.theoc.restapp.adapters;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.barteksc.pdfviewer.PDFView;
 import com.theoc.restapp.HomeActivity;
+import com.theoc.restapp.MyPointsActivity;
 import com.theoc.restapp.R;
+import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.sidemenu.AyarlarActivity;
 import com.theoc.restapp.sidemenu.HakkimizdaActivity;
 import com.theoc.restapp.sidemenu.OneriActivity;
@@ -31,8 +38,8 @@ public class NavAdapter extends BaseAdapter {
             R.drawable.kampanyalar,
             R.drawable.hakkimizda,
             R.drawable.degerlendir,
-            R.drawable.sss,
             R.drawable.oneri,
+            R.drawable.sss,
             R.drawable.ayarlar
     };
 
@@ -90,11 +97,37 @@ public class NavAdapter extends BaseAdapter {
                         activity.startActivity(intent);
                         break;
                     case 2:
+                        if (GeneralSync.id != -1) {
+                            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+                            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                            } else {
+                                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                            }
+                            Activity activity99 = (Activity) context;
+                            try {
+                                activity99.startActivity(goToMarket);
+                            } catch (ActivityNotFoundException e) {
+                                activity99.startActivity(new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+                            }
+                        } else {
+                            Toast.makeText(context, "Bu özellikten faydalanmak için hesap oluşturup giriş yapın", Toast.LENGTH_LONG).show();
+                        }
                         break;
                     case 3:
-                        Activity activity2 = (Activity) context;
-                        Intent intent3 = new Intent(context, OneriActivity.class);
-                        activity2.startActivity(intent3);
+                        if (GeneralSync.id != -1) {
+                            Activity activity2 = (Activity) context;
+                            Intent intent3 = new Intent(context, OneriActivity.class);
+                            activity2.startActivity(intent3);
+                        } else {
+                            Toast.makeText(context, "Bu özellikten faydalanmak için hesap oluşturup giriş yapın", Toast.LENGTH_LONG).show();
+                        }
                         break;
                     case 4:
                         Activity activity3 = (Activity) context;
@@ -102,9 +135,13 @@ public class NavAdapter extends BaseAdapter {
                         activity3.startActivity(intent5);
                         break;
                     case 5:
-                        Activity activity4 = (Activity) context;
-                        Intent intent6 = new Intent(context, AyarlarActivity.class);
-                        activity4.startActivity(intent6);
+                        if (GeneralSync.id != -1) {
+                            Activity activity4 = (Activity) context;
+                            Intent intent6 = new Intent(context, AyarlarActivity.class);
+                            activity4.startActivity(intent6);
+                        } else {
+                            Toast.makeText(context, "Bu özellikten faydalanmak için hesap oluşturup giriş yapın", Toast.LENGTH_LONG).show();
+                        }
                         break;
                     default:
                         // do nothing

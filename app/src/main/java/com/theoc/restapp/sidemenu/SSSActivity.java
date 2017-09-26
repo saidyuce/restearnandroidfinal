@@ -1,28 +1,28 @@
 package com.theoc.restapp.sidemenu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.preference.PreferenceManager;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.theoc.restapp.HomeActivity;
+import com.theoc.restapp.LoginActivity;
 import com.theoc.restapp.R;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
+import com.theoc.restapp.helper.GoogleAPIClient;
 
 public class SSSActivity extends AppCompatActivity {
 
@@ -55,6 +55,24 @@ public class SSSActivity extends AppCompatActivity {
         });
 
         ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
+
+        findViewById(R.id.navCikisButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new GoogleAPIClient().signOutClient();
+                LoginManager.getInstance().logOut();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("id", 0);
+                editor.putString("temp_key", "");
+                GeneralSync.id = 0;
+                GeneralSync.temp_key = "";
+                editor.apply();
+                Intent intent = new Intent(SSSActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

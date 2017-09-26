@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">RestApp</string>
+    <string name="app_name">Restearn</string>
     <string name="facebook_app_id">125034957904306</string>
     <string name="googlemapsapi">AIzaSyB3OQ3_3IEONgnVFIpd4fJtKC3mxlKCF4g</string>
-    <string name="googleclientid">677947695618-4lhs4u6j3npnq8b93mnc1dnd38iqgoph.apps.googleusercontent.com</string>
-    <string name="googleserverid">AIzaSyCsaEhW2SmRRJ9Bh5EkTa07LrDn1r8QGx4</string>
-
+    <string name="googleclientid">677947695618-iaic0455fdsv403crielus3ci8rsr8th.apps.googleusercontent.com</string>
+    <string name="googleserverid">AIzaSyC4GyvtfcYNyp4JH05WEuswHMyT2q_7oho</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -37,6 +36,6 @@
     <string name="title_activity_oneri">Öneri ve Şikayet</string>
     <string name="title_activity_sss">Sıkça Sorulan Sorular</string>
 
-    <string name="sozlesme">Restearn <u>kullanıcı sözleşmesini</u> okudum ve onaylıyorum</string>
+    <string name="sozlesme">Restearn <u>Kullanıcı Sözleşmesini</u> okudum ve onaylıyorum</string>
     <string name="title_activity_ayarlar">AyarlarActivity</string>
 </resources>

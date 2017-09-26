@@ -30,9 +30,9 @@ public class FirebaseService extends FirebaseMessagingService {
     public void showNotification(String message) {
         PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, HomeActivity.class), 0);
         Notification notification = new NotificationCompat.Builder(this)
-                .setTicker("Resturn")
-                .setSmallIcon(android.R.drawable.ic_menu_report_image)
-                .setContentTitle("RestUpp")
+                .setTicker("Restearn")
+                .setSmallIcon(R.drawable.notificon)
+                .setContentTitle("Restearn")
                 .setContentText(message)
                 .setContentIntent(pi)
                 .setAutoCancel(true)

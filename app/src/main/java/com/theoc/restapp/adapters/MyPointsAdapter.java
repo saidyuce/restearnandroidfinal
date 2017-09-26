@@ -63,7 +63,6 @@ public class MyPointsAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.imageView = (CircleImageView) row.findViewById(R.id.placeholderImageView2);
             holder.kafeadıTextView = (TextView) row.findViewById(R.id.kafeadıTextView);
-            holder.kafelokasyonTextView = (TextView) row.findViewById(R.id.kafelokasyonTextView);
             holder.dereceTextView = (TextView) row.findViewById(R.id.dereceTextView);
             holder.ödülTextView = (TextView) row.findViewById(R.id.ödülTextView);
             holder.progressBar = (ProgressBar) row.findViewById(R.id.progressBar);
@@ -77,7 +76,6 @@ public class MyPointsAdapter extends BaseAdapter {
         counter = Integer.parseInt((int) Double.parseDouble(data.get_point(position)) / 360 + "");
 
         holder.kafeadıTextView.setText(data.get_cafename(position));
-        holder.kafelokasyonTextView.setText(data.get_city(position));
         holder.dereceTextView.setText((int) point + "");
         holder.ödülTextView.setText(counter + "");
         Glide.with(context)
@@ -111,7 +109,7 @@ public class MyPointsAdapter extends BaseAdapter {
 
     public static class ViewHolder {
         CircleImageView imageView;
-        TextView kafeadıTextView, kafelokasyonTextView, dereceTextView, ödülTextView;
+        TextView kafeadıTextView, dereceTextView, ödülTextView;
         RelativeLayout main_frame;
         ProgressBar progressBar;
     }

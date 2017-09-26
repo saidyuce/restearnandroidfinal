@@ -15,29 +15,29 @@
         android:id="@+id/largeImageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="25"
-        android:scaleType="centerCrop"
-        android:src="@drawable/cafejoinbanner" />
+        android:layout_weight="33"
+        android:src="@drawable/placeholder" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="39"
+        android:layout_weight="34.9"
         android:weightSum="100"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/cafeTextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/cafeTextView"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="14sp"
-            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_weight="65"/>
+            android:layout_marginTop="10dp"
+            android:layout_weight="65"
+            android:fontFamily="sans-serif-light"
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -56,7 +56,7 @@
                 android:id="@+id/phoneImageButton"
                 android:layout_weight="20"
                 android:src="@drawable/telefon"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 android:background="#00ffffff"
                 android:layout_gravity="center_vertical"
                 android:padding="2.5dp"/>
@@ -67,7 +67,7 @@
                 android:id="@+id/webImageButton"
                 android:layout_weight="20"
                 android:src="@drawable/web"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 android:background="#00ffffff"
                 android:layout_gravity="center_vertical"
                 android:padding="2.5dp"/>
@@ -78,7 +78,8 @@
                 android:id="@+id/fbImageButton"
                 android:layout_weight="20"
                 android:src="@drawable/facebook"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
+                android:clickable="true"
                 android:background="#00ffffff"
                 android:layout_gravity="center_vertical"
                 android:padding="2.5dp"/>
@@ -88,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/twitterImageButton"
                 android:layout_weight="20"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 android:src="@drawable/twitter"
                 android:background="#00ffffff"
                 android:layout_gravity="center_vertical"
@@ -99,7 +100,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/instaImageButton"
                 android:layout_weight="20"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 android:src="@drawable/instagram"
                 android:background="#00ffffff"
                 android:layout_gravity="center_vertical"
@@ -126,7 +127,7 @@
               android:layout_width="match_parent"
               android:layout_height="0dp"
               tools:context="com.theoc.restapp.CafeActivity"
-              android:layout_weight="35.9"
+              android:layout_weight="32"
               />
 
 </LinearLayout>

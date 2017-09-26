@@ -1,6 +1,5 @@
 package com.theoc.restapp.helper;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,8 +15,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.theoc.restapp.CafeJoinActivity;
-import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.LoginActivity;
 import com.theoc.restapp.R;
 import com.theoc.restapp.adapters.SepetAdapter;

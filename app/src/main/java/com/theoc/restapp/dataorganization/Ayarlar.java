@@ -1,6 +1,5 @@
 package com.theoc.restapp.dataorganization;
 
-import com.theoc.restapp.LoginActivity;
 import com.theoc.restapp.extendclass.DataConnections.ServConnection;
 import com.theoc.restapp.sidemenu.AyarlarActivity;
 

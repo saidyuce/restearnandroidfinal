@@ -35,8 +35,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="17"
-                android:src="@drawable/siyahlogo"
-                android:scaleType="centerInside"/>
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/siyahlogo" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -51,7 +53,7 @@
                     android:gravity="center"
                     android:textAlignment="center"
                     android:textColor="#000000"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     android:fontFamily="sans-serif-light"
                     android:id="@+id/textView"
                     android:layout_above="@+id/moreTextView"
@@ -63,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     android:textAlignment="center"
                     android:fontFamily="sans-serif-light"
                     android:autoLink="web"
@@ -87,7 +89,7 @@
                     android:id="@+id/fbImageButton"
                     android:layout_weight="30"
                     android:src="@drawable/facebook"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
                     android:background="#00ffffff"
                     android:layout_gravity="center_vertical"/>
 
@@ -96,7 +98,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/twitterImageButton"
                     android:layout_weight="30"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/twitter"
                     android:background="#00ffffff"
                     android:layout_gravity="center_vertical"/>
@@ -106,7 +108,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/instaImageButton"
                     android:layout_weight="30"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/instagram"
                     android:background="#00ffffff"
                     android:layout_gravity="center_vertical"/>

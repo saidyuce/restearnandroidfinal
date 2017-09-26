@@ -1,15 +1,14 @@
 package com.theoc.restapp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,10 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AbsListView;
 import android.widget.CompoundButton;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,18 +26,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
-import com.theoc.restapp.dataorganization.SocketMessage;
 import com.theoc.restapp.dataorganization.barcode.ConnectionPc;
 import com.theoc.restapp.dataorganization.screendata.GetDataHomeScreen;
+import com.theoc.restapp.helper.GoogleAPIClient;
 import com.theoc.restapp.helper.HeaderGridView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -51,7 +42,6 @@ public class HomeActivity extends AppCompatActivity {
     GetDataHomeScreen getDataHome;
     public SearchView actionView2;
     ConnectionPc connection;
-    GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +49,17 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(HomeActivity.this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        mGoogleApiClient.connect();
+        new GoogleAPIClient().connectClient(this);
         getDataHome = new GetDataHomeScreen(this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        findViewById(R.id.footerRL).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.navCikisButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                new GoogleAPIClient().signOutClient();
                 LoginManager.getInstance().logOut();
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = prefs.edit();
@@ -117,11 +100,14 @@ public class HomeActivity extends AppCompatActivity {
         midiconImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, QRActivity.class);
-                startActivity(intent); //bu orjinal hali
-                /*Intent intent = new Intent(HomeActivity.this, CafeJoinActivity.class);
-                intent.putExtra("qrText", "{\"cafe\":\"3\",\"masa\":\"D14\"}");*/
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if (GeneralSync.id != -1) {
+                    Intent intent = new Intent(HomeActivity.this, QRActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else {
+                    Toast.makeText(HomeActivity.this, "Bu özellikten faydalanmak için hesap oluşturup giriş yapın", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         bottomBar = (LinearLayout) findViewById(R.id.bottomBar);
@@ -135,6 +121,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         GeneralSync.set_screen(Screens.HomeScreen);
+
     }
 
     @Override
@@ -229,7 +216,32 @@ public class HomeActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.navNameTextView)).setText(GeneralSync.isim + " " + GeneralSync.soyisim);
         }
 
-       getDataHome.start_paralel();
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+
+        } else {
+                getDataHome.start_paralel();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getDataHome.start_paralel();
+                } else {
+                    Toast.makeText(this, "Konum izni vermediniz. Uygulamayi kullanmak için konum izni vermelisiniz", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
     }
 }

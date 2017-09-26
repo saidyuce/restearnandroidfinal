@@ -1,24 +1,16 @@
 package com.theoc.restapp;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.theoc.restapp.dataorganization.Kayit;
 import com.theoc.restapp.dataorganization.KayitType;
-import com.theoc.restapp.extendclass.DataConnections.ServConnection;
 import com.theoc.restapp.helper.SozlesmeActivity;
 
 import org.json.JSONException;

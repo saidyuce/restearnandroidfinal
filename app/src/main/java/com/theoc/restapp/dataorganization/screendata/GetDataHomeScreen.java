@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.provider.BaseColumns;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +32,8 @@ import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.R;
 import com.theoc.restapp.adapters.HomeGridAdapter;
 import com.theoc.restapp.adapters.ImageAdapter;
+import com.theoc.restapp.helper.HomeDialog;
+import com.theoc.restapp.helper.HomeDialogInterface;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
@@ -38,6 +43,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GetDataHomeScreen extends GetDataFromLocal {
 
@@ -101,6 +108,11 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                     "prize.name as prize_name," +
                     "cafe.x_,"+
                     "cafe.y_,"+
+                    "cafe.face,"+
+                    "cafe.twitter,"+
+                    "cafe.instagram,"+
+                    "cafe.tel,"+
+                    "cafe.site,"+
                     "campaing.category as campaing_category,"+
                     "cafe.category as cafe_category" +
                     " FROM (campaing JOIN cafe on campaing.cafe_id=cafe.id) JOIN prize on campaing.cafe_id=prize.cafe_id  "+q_loc + " ORDER BY distance ASC");
@@ -120,6 +132,11 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                     "prize.name as prize_name," +
                     "cafe.x_,"+
                     "cafe.y_,"+
+                    "cafe.face,"+
+                    "cafe.twitter,"+
+                    "cafe.instagram,"+
+                    "cafe.tel,"+
+                    "cafe.site,"+
                     "campaing.category as campaing_category,"+
                     "cafe.category as cafe_category " +
                     " FROM (campaing JOIN cafe on campaing.cafe_id=cafe.id) JOIN prize on campaing.cafe_id=prize.cafe_id  "+q_loc + " ORDER BY distance ASC");
@@ -163,16 +180,43 @@ public class GetDataHomeScreen extends GetDataFromLocal {
 
     private void set_top_gui() {
         ana_data = main_data;
-        ImageAdapter adapter = new ImageAdapter(a.getBaseContext(),this);
+        final ImageAdapter adapter = new ImageAdapter(a.getBaseContext(), this, new HomeDialogInterface() {
+            @Override
+            public void show(String category, String campaing_detail, String id, String icon, String name, double x, double y, String detail, String large_image, String face, String twitter, String instagram, String site, String tel) {
+                HomeDialog homeDialog = new HomeDialog(a, category, campaing_detail, id, icon, name, x, y, detail, large_image, face, twitter, instagram, site, tel);
+                homeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                homeDialog.show();
+            }
+        });
         ViewGroup header = (ViewGroup) a.getLayoutInflater().inflate(R.layout.home_single_item_premium, ((HomeActivity) a).listView, false);
-        ViewPager viewPager = (ViewPager) header.findViewById(R.id.view_pager);
-        CirclePageIndicator indicator = (CirclePageIndicator) header.findViewById(R.id.titles);
+        final ViewPager viewPager = (ViewPager) header.findViewById(R.id.view_pager);
+        final CirclePageIndicator indicator = (CirclePageIndicator) header.findViewById(R.id.titles);
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
         ((HomeActivity) a).listView.addHeaderView(header);
         HomeGridAdapter adapter_campaing = new HomeGridAdapter(a, this);
         ((HomeActivity) a).listView.setAdapter(adapter_campaing);
+        final Handler handler = new Handler(a.getMainLooper());
 
+        final Runnable update = new Runnable() {
+            public void run() {
+                if (PageListener.currentPage == adapter.getCount()) {
+                    viewPager.setCurrentItem(0, true);
+                    PageListener.currentPage = 0;
+                } else {
+                    viewPager.setCurrentItem(PageListener.currentPage++, true);
+                }
+            }
+        };
+
+
+        new Timer().schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 500 , 4000);
         //ViewPager   viewPager = (ViewPager)a. findViewById(R.id.view_pager);
         //CirclePageIndicator titleIndicator = (CirclePageIndicator)a.findViewById(R.id.titles);
         //titleIndicator.setViewPager(viewPager);
@@ -198,6 +242,105 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         return null;
     }
 
+    public String get_premium_detail(int json_indis) {
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("cafe_detail");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_face(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("face");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_twitter(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("twitter");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_instagram(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("instagram");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_site(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("site");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_cafe_tel(int json_indis) {
+        try {
+            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("tel");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_face(int json_indis) {
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("face");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_twitter(int json_indis) {
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("twitter");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_instagram(int json_indis) {
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("instagram");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_site(int json_indis) {
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("site");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_tel(int json_indis) {
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("tel");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public int get_premium_size() {
         try {
             int counter = 0;
@@ -215,7 +358,7 @@ public class GetDataHomeScreen extends GetDataFromLocal {
 
     public String get_premium_image(int json_indis) {
         try {
-            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("large_image");
+            return ServConnection.get_file_url() + ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("large_image");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -224,7 +367,7 @@ public class GetDataHomeScreen extends GetDataFromLocal {
 
     public String get_cafe_icon(int json_indis) {
         try {
-            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("icon");
+            return ServConnection.get_file_url() + main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("icon");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -233,7 +376,7 @@ public class GetDataHomeScreen extends GetDataFromLocal {
 
     public String get_cafe_large_image(int json_indis) {
         try {
-            return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("large_image");
+            return ServConnection.get_file_url() + main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("large_image");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -259,10 +402,47 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         return 0;
     }
 
+    public String get_premium_icon(int json_indis) {
+        try {
+            return ServConnection.get_file_url() + ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("icon");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_large_image(int json_indis) {
+        try {
+            return ServConnection.get_file_url() + ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("large_image");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public double get_premium_x(int json_indis) {
+
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getDouble("x_");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public double get_premium_y(int json_indis) {
+
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getDouble("y_");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public String get_campaing_picture_url(int json_indis) {
 
         try {
-            return ServConnection.get_file_url()+main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("picture_url");
+            return ServConnection.get_file_url() + main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("picture_url");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -278,6 +458,17 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         }
         return null;
     }
+
+    public String get_premium_category(int json_indis) {
+
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("campaing_category");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String get_cafe_category(int json_indis) {
 
         try {
@@ -297,10 +488,30 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         return null;
     }
 
+    public String get_premium_campaing_detail(int json_indis) {
+
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("detail");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String get_cafe_name(int json_indis) {
 
         try {
             return main_data.getJSONArray("campaing").getJSONObject(json_indis).getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_name(int json_indis) {
+
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -320,6 +531,16 @@ public class GetDataHomeScreen extends GetDataFromLocal {
 
         try {
             return main_data.getJSONArray("campaing").getJSONObject(json_indis).getInt("cfid") + "";
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String get_premium_id(int json_indis) {
+
+        try {
+            return ana_data.getJSONArray("campaing").getJSONObject(json_indis).getInt("cfid") + "";
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -365,7 +586,13 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                 from,
                 to,
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        ((HomeActivity) a).actionView2.setSuggestionsAdapter(cursorAdapter);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((HomeActivity) a).actionView2.setSuggestionsAdapter(cursorAdapter);
+            }
+        }, 500);
 
     }
 
@@ -377,6 +604,12 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         String name = "";
         String cafe_detail = "";
         String large_image = "";
+        String face = "";
+        String twitter = "";
+        String instagram = "";
+        String web = "";
+        String tel = "";
+
         try {
             JSONArray campaingArray = ana_data.getJSONArray("campaing");
             for (int i = 0; i < campaingArray.length(); i++) {
@@ -386,7 +619,13 @@ public class GetDataHomeScreen extends GetDataFromLocal {
                     name = campaingArray.getJSONObject(i).getString("name");
                     id = campaingArray.getJSONObject(i).getInt("cfid");
                     cafe_detail = campaingArray.getJSONObject(i).getString("cafe_detail");
-                    large_image = campaingArray.getJSONObject(i).getString("large_image");
+                    large_image = ServConnection.get_file_url() + campaingArray.getJSONObject(i).getString("large_image");
+                    face = campaingArray.getJSONObject(i).getString("face");
+                    twitter = campaingArray.getJSONObject(i).getString("twitter");
+                    instagram = campaingArray.getJSONObject(i).getString("instagram");
+                    web = campaingArray.getJSONObject(i).getString("site");
+                    tel = campaingArray.getJSONObject(i).getString("tel");
+
                 }
             }
         } catch (JSONException e) {
@@ -399,6 +638,12 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         intent.putExtra("cafe_id", id + "");
         intent.putExtra("cafe_detail", cafe_detail);
         intent.putExtra("large_image", large_image);
+        intent.putExtra("face", face);
+        intent.putExtra("twitter", twitter);
+        intent.putExtra("instagram", instagram);
+        intent.putExtra("tel", tel);
+        intent.putExtra("web", web);
+
         a.startActivity(intent);
     }
 
@@ -523,5 +768,12 @@ public class GetDataHomeScreen extends GetDataFromLocal {
         }
     }
 
+    private static class PageListener extends ViewPager.SimpleOnPageChangeListener {
+        private static int currentPage;
 
+        public void onPageSelected(int position) {
+            currentPage = position;
+        }
+    }
 }
+

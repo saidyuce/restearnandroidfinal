@@ -1,8 +1,10 @@
 package com.theoc.restapp.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +43,7 @@ public class HomeGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
 
         final ViewHolder holder;
         View row = convertView;
@@ -73,7 +75,8 @@ public class HomeGridAdapter extends BaseAdapter {
         holder.main_frame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    HomeDialog dialog = new HomeDialog(context,
+                    Activity activity = (Activity) context;
+                    HomeDialog dialog = new HomeDialog(activity,
                             data.get_campaing_category(finalPosition),
                             data.get_campaing_detail(finalPosition),
                             data.get_cafe_id(finalPosition),
@@ -82,7 +85,12 @@ public class HomeGridAdapter extends BaseAdapter {
                             data.get_cafe_x(finalPosition),
                             data.get_cafe_y(finalPosition),
                             data.get_cafe_detail(finalPosition),
-                            data.get_cafe_large_image(finalPosition));
+                            data.get_cafe_large_image(finalPosition),
+                            data.get_cafe_face(finalPosition),
+                            data.get_cafe_twitter(finalPosition),
+                            data.get_cafe_instagram(finalPosition),
+                            data.get_cafe_site(finalPosition),
+                            data.get_cafe_tel(finalPosition));
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                     dialog.show();
                 }

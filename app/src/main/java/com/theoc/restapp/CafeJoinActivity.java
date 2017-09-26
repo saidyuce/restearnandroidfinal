@@ -1,6 +1,5 @@
 package com.theoc.restapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.dataorganization.Screens;
-import com.theoc.restapp.dataorganization.SocketMessage;
 import com.theoc.restapp.dataorganization.barcode.ReadBarcode;
 import com.theoc.restapp.dataorganization.screendata.GetDataCafeJoin;
 

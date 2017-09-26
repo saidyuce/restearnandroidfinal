@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public class SifreUnuttum extends ServConnection {
 
-LoginActivity loginActivity;
+    LoginActivity loginActivity;
 
 JSONObject jj_temp;
 

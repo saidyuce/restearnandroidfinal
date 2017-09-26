@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "677947695618",
-    "project_id": "endless-terra-140914"
+    "firebase_url": "https://endless-terra-140914.firebaseio.com",
+    "project_id": "endless-terra-140914",
+    "storage_bucket": "endless-terra-140914.appspot.com"
   },
   "client": [
     {
@@ -13,16 +15,32 @@
       },
       "oauth_client": [
         {
+          "client_id": "677947695618-qa1gg3o2kbpaf0ada33s61skmnj7v0cj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theoc.restapp",
+            "certificate_hash": "da2a6d4ffb985e8cc84394da5b55ed0d3b108255"
+          }
+        },
+        {
+          "client_id": "677947695618-imvliogliv6jjah3uupm3g8bc7upc4qr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theoc.restapp",
+            "certificate_hash": "a393f392accc2c245cf5beed8135cdf2e5736653"
+          }
+        },
+        {
+          "client_id": "677947695618-iaic0455fdsv403crielus3ci8rsr8th.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
           "client_id": "677947695618-ecqltsengbottfua28cct19gdf5n2ku6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.theoc.restapp",
             "certificate_hash": "a12376b2ac7d7acc56ab82956ba32ac9c7ef23f8"
           }
-        },
-        {
-          "client_id": "677947695618-4lhs4u6j3npnq8b93mnc1dnd38iqgoph.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -35,11 +53,24 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677947695618-da6788b98iv3k72i3u8befn5vqngm8ui.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theoc.Restearn",
+                "app_store_id": "1248339195"
+              }
+            },
+            {
+              "client_id": "677947695618-iaic0455fdsv403crielus3ci8rsr8th.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

@@ -1,11 +1,9 @@
 package com.theoc.restapp.sidemenu;
 
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,16 +16,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.theoc.restapp.HomeActivity;
+import com.theoc.restapp.LoginActivity;
 import com.theoc.restapp.R;
 import com.theoc.restapp.adapters.NavAdapter;
 import com.theoc.restapp.dataorganization.Ayarlar;
 import com.theoc.restapp.dataorganization.GeneralSync;
 import com.theoc.restapp.dataorganization.Screens;
 import com.theoc.restapp.dataorganization.ServerYanıt;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.theoc.restapp.helper.GoogleAPIClient;
 
 public class AyarlarActivity extends AppCompatActivity {
 
@@ -82,6 +80,25 @@ public class AyarlarActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(AyarlarActivity.this, "Lütfen tüm gerekli alanları doldurun", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        findViewById(R.id.navCikisButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new GoogleAPIClient().signOutClient();
+                LoginManager.getInstance().logOut();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("id", 0);
+                editor.putString("temp_key", "");
+                GeneralSync.id = 0;
+                GeneralSync.temp_key = "";
+                editor.apply();
+                Intent intent = new Intent(AyarlarActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

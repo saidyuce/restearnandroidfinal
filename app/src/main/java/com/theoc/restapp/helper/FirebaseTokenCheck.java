@@ -7,8 +7,6 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.theoc.restapp.CafeJoinActivity;
-import com.theoc.restapp.HomeActivity;
 import com.theoc.restapp.LoginActivity;
 import com.theoc.restapp.dataorganization.GeneralSync;
 
