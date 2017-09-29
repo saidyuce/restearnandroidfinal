@@ -110,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         VersionChecker versionChecker = new VersionChecker();
         try {
             String latestVersion = versionChecker.execute().get();
@@ -117,7 +118,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.w("LATEST VERSION=", latestVersion);
                 Log.w("CURRENT VERSION=", BuildConfig.VERSION_NAME);
                 if (compareVersionNames(BuildConfig.VERSION_NAME, latestVersion) == -1) {
-                    prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     float lastTime = prefs.getFloat("lastUpdateCheck", 0);
                     if (lastTime != 0) {
                         if (System.currentTimeMillis() - lastTime >= 7200000) {
@@ -126,6 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     .setPositiveButton("Güncelle", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
+                                            LoginActivity.this.deleteDatabase("sqllite_database");
                                             Uri uri = Uri.parse("market://details?id=" + LoginActivity.this.getBaseContext().getPackageName());
                                             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
 
@@ -148,13 +149,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     .setCancelable(false)
                                     .show();
                         } else {
-                            //Log.w("Last Update Check=", lastTime+"");
-                            //Log.w("Time In Between", System.currentTimeMillis() - lastTime + "");
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putFloat("lastUpdateCheck", 0);
-                            //Log.w("Last Update Check=", "ADDED");
-                            editor.apply();
-
                             /*giris = new Giris(this);
                             giris.onceki_giris();*/
                         }
@@ -169,6 +163,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } else {
                     /*giris = new Giris(this);
                             giris.onceki_giris();*/
+                    //Log.w("Last Update Check=", lastTime+"");
+                    //Log.w("Time In Between", System.currentTimeMillis() - lastTime + "");
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putFloat("lastUpdateCheck", 0);
+                    //Log.w("Last Update Check=", "ADDED");
+                    editor.apply();
                 }
             } else {
                 /*giris = new Giris(this);
